@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bài 11: Ứng dụng thực tế</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/fontello.css">
+    <link rel="stylesheet" href="../css/design-system.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/lesson-styles.css">
+    <link rel="stylesheet" href="../css/animations.css">
+</head>
+<body class="lesson" data-lesson="11">
+    <nav class="lesson-nav">
+        <a href="../index.html">← Về trang chủ</a>
+        <div class="lesson-progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+    </nav>
+
+    <header class="lesson-header">
+        <h1>Bài 11: Ứng dụng thực tế</h1>
+        <p class="lesson-meta">
+            <span>⏱️ Thời gian: ~40 phút</span>
+            <span>⭐ Độ khó: Khó</span>
+            <span>📚 Module 5: Ứng dụng thực tế</span>
+        </p>
+    </header>
+
+    <main class="lesson-content">
+        <section class="theory">
+            <h2>📖 Lý thuyết</h2>
+            
+            <h3>HTTPS và TLS</h3>
+            <p>
+                <strong>HTTPS</strong> (HyperText Transfer Protocol Secure) là phiên bản bảo mật của HTTP, 
+                sử dụng TLS/SSL để mã hóa dữ liệu giữa browser và server.
+            </p>
+
+            <h4>TLS Handshake Process:</h4>
+            <ol>
+                <li>Client gửi "Client Hello" với supported cipher suites</li>
+                <li>Server gửi "Server Hello" với chosen cipher suite + certificate</li>
+                <li>Client xác thực certificate</li>
+                <li>Client tạo pre-master secret, mã hóa bằng server's public key</li>
+                <li>Cả hai bên tính master secret từ pre-master secret</li>
+                <li>Bắt đầu mã hóa dữ liệu với symmetric key</li>
+            </ol>
+
+            <h3>Password Hashing</h3>
+            <p>
+                Mật khẩu không bao giờ được lưu dạng plaintext. Thay vào đó, lưu hash của mật khẩu.
+            </p>
+            <ul>
+                <li><strong>Salt:</strong> Random data thêm vào password trước khi hash</li>
+                <li><strong>Pepper:</strong> Secret key thêm vào password</li>
+                <li><strong>Key derivation:</strong> PBKDF2, bcrypt, Argon2</li>
+            </ul>
+
+            <h3>Blockchain và Cryptocurrency</h3>
+            <p>
+                Blockchain sử dụng cryptography để:
+            </p>
+            <ul>
+                <li><strong>Hash chains:</strong> Mỗi block chứa hash của block trước</li>
+                <li><strong>Digital signatures:</strong> Xác thực giao dịch</li>
+                <li><strong>Proof of Work:</strong> Mining process</li>
+            </ul>
+
+            <h3>End-to-End Encryption</h3>
+            <p>
+                E2EE đảm bảo chỉ người gửi và người nhận mới có thể đọc thông điệp, 
+                ngay cả nhà cung cấp dịch vụ cũng không thể.
+            </p>
+            <div class="example-box">
+                <strong>Ví dụ:</strong> WhatsApp, Signal sử dụng E2EE
+            </div>
+        </section>
+
+        <section class="interactive-demo">
+            <h2>🎮 Thử nghiệm</h2>
+            
+            <h3>TLS Handshake Simulator</h3>
+            <div class="demo-container">
+                <button class="demo-btn" onclick="simulateTLS()">Bắt đầu TLS Handshake</button>
+                <div id="tls-steps" style="margin-top: 1rem;"></div>
+            </div>
+
+            <h3>Password Security Checker</h3>
+            <div class="demo-container">
+                <div class="demo-group">
+                    <label>Nhập mật khẩu để kiểm tra:</label>
+                    <input type="password" id="password-check" placeholder="Nhập mật khẩu...">
+                </div>
+                <button class="demo-btn" onclick="checkPassword()">Kiểm tra</button>
+                <div id="password-result" style="margin-top: 1rem;"></div>
+            </div>
+
+            <h3>Blockchain Hash Chain Demo</h3>
+            <div class="demo-container">
+                <div class="demo-group">
+                    <label>Block Data:</label>
+                    <input type="text" id="block-data" placeholder="Nhập dữ liệu block...">
+                </div>
+                <div class="demo-group">
+                    <label>Previous Hash:</label>
+                    <input type="text" id="prev-hash" placeholder="Hash của block trước..." readonly>
+                </div>
+                <button class="demo-btn" onclick="createBlock()">Tạo Block</button>
+                <div id="blockchain-result" style="margin-top: 1rem;"></div>
+            </div>
+        </section>
+
+        <section class="quiz">
+            <h2>📝 Kiểm tra kiến thức</h2>
+            <div class="quiz-questions"></div>
+            <button class="quiz-submit">Nộp bài</button>
+            <div class="quiz-score"></div>
+        </section>
+
+        <section class="challenge">
+            <h2>🎯 Tổng kết khóa học</h2>
+            <p>Chúc mừng bạn đã hoàn thành khóa học! Hãy làm bài kiểm tra cuối cùng:</p>
+            <div class="completion-certificate" style="text-align: center; padding: 2rem; background: var(--border-dark); border-radius: 0.5rem; margin-top: 1rem;">
+                <h3>🎓 Chứng chỉ hoàn thành</h3>
+                <p>Bạn đã hoàn thành 11 bài học về Mật mã học!</p>
+                <button class="demo-btn" onclick="generateCertificate()">Tạo chứng chỉ</button>
+                <div id="certificate-content" style="margin-top: 1rem;"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="lesson-footer">
+        <button class="btn-prev" onclick="window.location.href='lesson-10-hash-signatures.html'">← Bài trước</button>
+        <button class="btn-next" onclick="window.location.href='../index.html'">Về trang chủ →</button>
+    </footer>
+
+    <script src="../js/crypt-util.js"></script>
+    <script src="../js/lesson-core.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/crypto-js.js"></script>
+    <script>
+        LessonCore.currentLesson = 11;
+        LessonCore.updateLessonProgressBar();
+        QuizSystem.init(11);
+
+        let previousHash = '0';
+        let blockNumber = 0;
+
+        function simulateTLS() {
+            const steps = [
+                '1. Client → Server: Client Hello (supported ciphers)',
+                '2. Server → Client: Server Hello (chosen cipher) + Certificate',
+                '3. Client: Verify certificate',
+                '4. Client → Server: Pre-master secret (encrypted with server public key)',
+                '5. Both: Calculate master secret',
+                '6. Both: Generate session keys',
+                '7. ✓ Secure connection established!'
+            ];
+
+            const container = document.getElementById('tls-steps');
+            container.innerHTML = '<h4>TLS Handshake Steps:</h4><ol>';
+            steps.forEach((step, index) => {
+                setTimeout(() => {
+                    const li = document.createElement('li');
+                    li.textContent = step;
+                    li.style.padding = '0.5rem';
+                    li.style.background = index % 2 === 0 ? 'var(--border-dark)' : 'var(--back-high)';
+                    container.querySelector('ol').appendChild(li);
+                }, index * 1000);
+            });
+        }
+
+        function checkPassword() {
+            const password = document.getElementById('password-check').value;
+            if (!password) return;
+
+            let strength = 0;
+            let feedback = [];
+
+            if (password.length >= 8) strength++;
+            else feedback.push('Mật khẩu nên có ít nhất 8 ký tự');
+
+            if (/[a-z]/.test(password)) strength++;
+            else feedback.push('Thêm chữ thường');
+
+            if (/[A-Z]/.test(password)) strength++;
+            else feedback.push('Thêm chữ hoa');
+
+            if (/[0-9]/.test(password)) strength++;
+            else feedback.push('Thêm số');
+
+            if (/[^a-zA-Z0-9]/.test(password)) strength++;
+            else feedback.push('Thêm ký tự đặc biệt');
+
+            let rating = 'Rất yếu';
+            let color = 'red';
+            if (strength >= 4) {
+                rating = 'Mạnh';
+                color = 'green';
+            } else if (strength >= 3) {
+                rating = 'Trung bình';
+                color = 'orange';
+            } else if (strength >= 2) {
+                rating = 'Yếu';
+                color = 'orange';
+            }
+
+            const hash = CryptoJS.SHA256(password).toString();
+            document.getElementById('password-result').innerHTML = `
+                <p><strong>Độ mạnh:</strong> <span style="color: ${color}">${rating}</span> (${strength}/5)</p>
+                <p><strong>Hash (SHA-256):</strong> <code style="word-break: break-all;">${hash}</code></p>
+                ${feedback.length > 0 ? '<p><strong>Gợi ý:</strong> ' + feedback.join(', ') + '</p>' : ''}
+            `;
+        }
+
+        function createBlock() {
+            const data = document.getElementById('block-data').value;
+            if (!data) return;
+
+            blockNumber++;
+            const timestamp = new Date().toISOString();
+            const blockData = {
+                number: blockNumber,
+                data: data,
+                previousHash: previousHash,
+                timestamp: timestamp
+            };
+
+            const blockString = JSON.stringify(blockData);
+            const hash = CryptoJS.SHA256(blockString).toString();
+            previousHash = hash;
+
+            document.getElementById('prev-hash').value = hash;
+
+            const result = document.getElementById('blockchain-result');
+            const blockDiv = document.createElement('div');
+            blockDiv.style.padding = '1rem';
+            blockDiv.style.margin = '0.5rem 0';
+            blockDiv.style.background = 'var(--border-dark)';
+            blockDiv.style.borderRadius = '0.3rem';
+            blockDiv.innerHTML = `
+                <h4>Block #${blockNumber}</h4>
+                <p><strong>Data:</strong> ${data}</p>
+                <p><strong>Previous Hash:</strong> <code>${blockData.previousHash}</code></p>
+                <p><strong>Hash:</strong> <code style="word-break: break-all;">${hash}</code></p>
+            `;
+            result.appendChild(blockDiv);
+        }
+
+        function generateCertificate() {
+            const progress = LessonCore.progress;
+            let completed = 0;
+            for (let i = 1; i <= 11; i++) {
+                if (progress[i] && progress[i].completed) completed++;
+            }
+
+            const certificate = document.getElementById('certificate-content');
+            certificate.innerHTML = `
+                <div style="border: 3px solid var(--accent); padding: 2rem; background: var(--back);">
+                    <h2 style="color: var(--accent);">CHỨNG CHỈ HOÀN THÀNH</h2>
+                    <p>Đã hoàn thành: ${completed}/11 bài học</p>
+                    <p>Ngày: ${new Date().toLocaleDateString('vi-VN')}</p>
+                    <p style="margin-top: 1rem;">🎉 Chúc mừng bạn đã hoàn thành khóa học Mật mã học!</p>
+                </div>
+            `;
+        }
+
+        const originalCheck = QuizSystem.checkAnswers.bind(QuizSystem);
+        QuizSystem.checkAnswers = function() {
+            const score = originalCheck();
+            if (score >= 70) {
+                LessonCore.markLessonComplete(11, score);
+            }
+        };
+    </script>
+</body>
+</html>
+

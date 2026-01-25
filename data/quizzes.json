@@ -1,0 +1,76 @@
+{
+  "1": [
+    {
+      "type": "multiple-choice",
+      "question": "Mật mã học là gì?",
+      "options": [
+        "Nghệ thuật viết và giải mã thông điệp bí mật",
+        "Khoa học về máy tính",
+        "Nghệ thuật vẽ tranh",
+        "Khoa học về toán học"
+      ],
+      "correctAnswer": 0
+    },
+    {
+      "type": "true-false",
+      "question": "Plaintext là văn bản đã được mã hóa.",
+      "correctAnswer": false
+    },
+    {
+      "type": "multiple-choice",
+      "question": "Thuật ngữ 'Cipher' có nghĩa là gì?",
+      "options": [
+        "Thuật toán mã hóa",
+        "Khóa bí mật",
+        "Văn bản gốc",
+        "Văn bản mã hóa"
+      ],
+      "correctAnswer": 0
+    }
+  ],
+  "2": [
+    {
+      "type": "multiple-choice",
+      "question": "Substitution cipher là gì?",
+      "options": [
+        "Thay thế từng ký tự bằng ký tự khác",
+        "Đảo thứ tự các ký tự",
+        "Xóa một số ký tự",
+        "Thêm ký tự mới"
+      ],
+      "correctAnswer": 0
+    },
+    {
+      "type": "true-false",
+      "question": "Key space càng lớn thì mã hóa càng an toàn.",
+      "correctAnswer": true
+    }
+  ],
+  "4": [
+    {
+      "type": "multiple-choice",
+      "question": "Caesar Cipher với shift = 3, chữ 'A' sẽ thành gì?",
+      "options": ["B", "C", "D", "E"],
+      "correctAnswer": 2
+    },
+    {
+      "type": "true-false",
+      "question": "Caesar Cipher rất dễ bị phá bằng frequency analysis.",
+      "correctAnswer": true
+    }
+  ],
+  "5": [
+    {
+      "type": "multiple-choice",
+      "question": "Vigenère Cipher sử dụng bao nhiêu bảng chữ cái?",
+      "options": ["1", "26", "Nhiều bảng", "Vô hạn"],
+      "correctAnswer": 2
+    },
+    {
+      "type": "true-false",
+      "question": "Vigenère Cipher an toàn hơn Caesar Cipher.",
+      "correctAnswer": true
+    }
+  ]
+}
+

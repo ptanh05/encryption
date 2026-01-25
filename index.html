@@ -1,47 +1,421 @@
 <!doctype html>
-
-<html lang="en">
-
+<html lang="vi">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cryptography Demos</title>
+    <title>🔐 Học Mật mã học từ đầu - Cryptography Learning</title>
     <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/fontello.css">
+    <link rel="stylesheet" href="css/design-system.css">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/lesson-styles.css">
+    <link rel="stylesheet" href="css/animations.css">
 </head>
-
-<body class="home">
-
+<body class="home page-enter">
+    <div class="particles"></div>
+    
+    <!-- Mobile Navigation Bar -->
+    <nav class="top-navbar" id="topNavbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <a href="#mainheader">🔐 Cryptography</a>
+            </div>
+            
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <!-- Navigation Menu -->
+            <ul class="navbar-menu" id="navbarMenu">
+                <li><a href="#progress-overview" class="nav-link">Tiến độ</a></li>
+                <li><a href="#module-1" class="nav-link">Module 1</a></li>
+                <li><a href="#module-2" class="nav-link">Module 2</a></li>
+                <li><a href="#module-3" class="nav-link">Module 3</a></li>
+                <li><a href="#module-4" class="nav-link">Module 4</a></li>
+                <li><a href="#module-5" class="nav-link">Module 5</a></li>
+                <li><a href="#legacy-demos" class="nav-link">Demos</a></li>
+            </ul>
+        </div>
+    </nav>
+    
     <header id="mainheader">
-        <h1>Cryptography Demos</h1>
-        <p class="sub-heading">A collection of interactive demonstrations of various cryptography schemes.</p>
+        <h1 class="glow-text">🔐 Học Mật mã học từ đầu</h1>
+        <p class="sub-heading">Khóa học tương tác về Cryptography - 11 bài học từ cơ bản đến nâng cao</p>
     </header>
 
-    <nav id="mainnav">
-
-        <section id="basic-schemes" class="group">
-            <h2>Early Cryptography</h2>
-            <ul>
-                <li><a href="pigpen.html">The Pigpen Cypher <span class="note">(Geometric Symbols)</span></a></li>
-                <li><a href="caesar.html">The Caesar Cypher <span class="note">(Single Alphabet, Shifted)</span></a></li>
-                <li><a href="vignere.html">The Vignère Cypher <span class="note">(Polyalphabetic)</span></a></li>
-            </ul>
-        </section>
-
-        <section id="modern-schemes" class="group">
-            <h2>Modern Cryptography</h2>
-            <ul>
-                <li><a href="symmetric.html">Symmetric Key Cryptography <span class="note">(The Key Distribution Problme)</span></a></li>
-                <li><a href="asymmetric.html">Asymmetric Public-Key Cryptography <span class="note">(The Basis of Most Modern Communication)</span></a></li>
-            </ul>
-        </section>
-
-    </nav>
-
     <main>
-        <img src="images/cryptography.svg" alt="Crypto Symbol">
+        <section id="progress-overview">
+            <h2>📊 Tiến độ học tập</h2>
+            <div class="progress-bar">
+                <div class="progress-fill" id="overall-progress">0%</div>
+            </div>
+            <p>Đã hoàn thành: <span id="completed-count">0</span>/11 bài học</p>
+        </section>
+
+        <nav id="mainnav">
+            <section id="module-1" class="module">
+                <h2>📚 Module 1: Giới thiệu và Nền tảng</h2>
+                <ul class="lessons-list">
+                    <li class="lesson-card enhanced-hover tilt-card glass-container" data-lesson="1" data-tooltip="Bắt đầu học về mật mã học">
+                        <a href="lessons/lesson-01-introduction.html">
+                            <span class="lesson-number">Bài 1</span>
+                            <div class="lesson-content-wrapper">
+                                <span class="lesson-title">Giới thiệu về Mật mã học</span>
+                                <span class="lesson-desc">Tìm hiểu lịch sử và khái niệm cơ bản</span>
+                            </div>
+                            <span class="lesson-progress">0%</span>
+                            <span class="lesson-checkmark">✓</span>
+                        </a>
+                    </li>
+                    <li class="lesson-card enhanced-hover tilt-card glass-container" data-lesson="2" data-tooltip="Học các khái niệm nền tảng">
+                        <a href="lessons/lesson-02-fundamentals.html">
+                            <span class="lesson-number">Bài 2</span>
+                            <div class="lesson-content-wrapper">
+                                <span class="lesson-title">Các khái niệm cơ bản</span>
+                                <span class="lesson-desc">Substitution, Transposition, Key space</span>
+                            </div>
+                            <span class="lesson-progress">0%</span>
+                            <span class="lesson-checkmark">✓</span>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+
+            <section id="module-2" class="module">
+                <h2>🏛️ Module 2: Mã hóa Cổ điển</h2>
+                <ul class="lessons-list">
+                    <li class="lesson-card enhanced-hover tilt-card glass-container" data-lesson="3" data-tooltip="Mã hóa hình học bí ẩn">
+                        <a href="lessons/lesson-03-pigpen.html">
+                            <span class="lesson-number">Bài 3</span>
+                            <div class="lesson-content-wrapper">
+                                <span class="lesson-title">Pigpen Cipher</span>
+                                <span class="lesson-desc">Mã hóa hình học của Freemasons</span>
+                            </div>
+                            <span class="lesson-progress">0%</span>
+                            <span class="lesson-checkmark">✓</span>
+                        </a>
+                    </li>
+                    <li class="lesson-card enhanced-hover tilt-card glass-container" data-lesson="4" data-tooltip="Phương pháp của Julius Caesar">
+                        <a href="lessons/lesson-04-caesar.html">
+                            <span class="lesson-number">Bài 4</span>
+                            <div class="lesson-content-wrapper">
+                                <span class="lesson-title">Caesar Cipher</span>
+                                <span class="lesson-desc">Mã hóa dịch chuyển đơn giản</span>
+                            </div>
+                            <span class="lesson-progress">0%</span>
+                            <span class="lesson-checkmark">✓</span>
+                        </a>
+                    </li>
+                    <li class="lesson-card enhanced-hover tilt-card glass-container" data-lesson="5" data-tooltip="Mã hóa đa bảng chữ cái phức tạp">
+                        <a href="lessons/lesson-05-vigenere.html">
+                            <span class="lesson-number">Bài 5</span>
+                            <div class="lesson-content-wrapper">
+                                <span class="lesson-title">Vigenère Cipher</span>
+                                <span class="lesson-desc">Mã hóa đa bảng chữ cái</span>
+                            </div>
+                            <span class="lesson-progress">0%</span>
+                            <span class="lesson-checkmark">✓</span>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+
+            <section id="module-3" class="module">
+                <h2>🔍 Module 3: Phân tích và Tấn công</h2>
+                <ul class="lessons-list">
+                    <li class="lesson-card enhanced-hover tilt-card glass-container" data-lesson="6" data-tooltip="Phá mã bằng phân tích tần suất">
+                        <a href="lessons/lesson-06-frequency-analysis.html">
+                            <span class="lesson-number">Bài 6</span>
+                            <div class="lesson-content-wrapper">
+                                <span class="lesson-title">Frequency Analysis</span>
+                                <span class="lesson-desc">Phân tích tần suất để phá mã</span>
+                            </div>
+                            <span class="lesson-progress">0%</span>
+                            <span class="lesson-checkmark">✓</span>
+                        </a>
+                    </li>
+                    <li class="lesson-card enhanced-hover tilt-card glass-container" data-lesson="7" data-tooltip="Kỹ thuật tấn công nâng cao">
+                        <a href="lessons/lesson-07-cryptanalysis.html">
+                            <span class="lesson-number">Bài 7</span>
+                            <div class="lesson-content-wrapper">
+                                <span class="lesson-title">Cryptanalysis Techniques</span>
+                                <span class="lesson-desc">Các kỹ thuật tấn công mã hóa</span>
+                            </div>
+                            <span class="lesson-progress">0%</span>
+                            <span class="lesson-checkmark">✓</span>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+
+            <section id="module-4" class="module">
+                <h2>🔐 Module 4: Mã hóa Hiện đại</h2>
+                <ul class="lessons-list">
+                    <li class="lesson-card enhanced-hover tilt-card glass-container" data-lesson="8" data-tooltip="Mã hóa một khóa và vấn đề phân phối">
+                        <a href="lessons/lesson-08-symmetric.html">
+                            <span class="lesson-number">Bài 8</span>
+                            <div class="lesson-content-wrapper">
+                                <span class="lesson-title">Symmetric Key Cryptography</span>
+                                <span class="lesson-desc">Mã hóa đối xứng và vấn đề phân phối khóa</span>
+                            </div>
+                            <span class="lesson-progress">0%</span>
+                            <span class="lesson-checkmark">✓</span>
+                        </a>
+                    </li>
+                    <li class="lesson-card enhanced-hover tilt-card glass-container neon-glow" data-lesson="9" data-tooltip="Cách mạng public-key crypto">
+                        <a href="lessons/lesson-09-asymmetric.html">
+                            <span class="lesson-number">Bài 9</span>
+                            <div class="lesson-content-wrapper">
+                                <span class="lesson-title">Asymmetric Public-Key Cryptography</span>
+                                <span class="lesson-desc">Mã hóa bất đối xứng</span>
+                            </div>
+                            <span class="lesson-progress">0%</span>
+                            <span class="lesson-checkmark">✓</span>
+                        </a>
+                    </li>
+                    <li class="lesson-card enhanced-hover tilt-card glass-container" data-lesson="10" data-tooltip="Đảm bảo toàn vẹn dữ liệu">
+                        <a href="lessons/lesson-10-hash-signatures.html">
+                            <span class="lesson-number">Bài 10</span>
+                            <div class="lesson-content-wrapper">
+                                <span class="lesson-title">Hash Functions & Digital Signatures</span>
+                                <span class="lesson-desc">Hàm băm và chữ ký số</span>
+                            </div>
+                            <span class="lesson-progress">0%</span>
+                            <span class="lesson-checkmark">✓</span>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+
+            <section id="module-5" class="module">
+                <h2>🌐 Module 5: Ứng dụng thực tế</h2>
+                <ul class="lessons-list">
+                    <li class="lesson-card enhanced-hover tilt-card glass-container color-shift" data-lesson="11" data-tooltip="Ứng dụng trong thực tế">
+                        <a href="lessons/lesson-11-applications.html">
+                            <span class="lesson-number">Bài 11</span>
+                            <div class="lesson-content-wrapper">
+                                <span class="lesson-title">Ứng dụng thực tế</span>
+                                <span class="lesson-desc">HTTPS, TLS, Blockchain và các ứng dụng</span>
+                            </div>
+                            <span class="lesson-progress">0%</span>
+                            <span class="lesson-checkmark">✓</span>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+
+            <section id="legacy-demos" class="module">
+                <h2>🔧 Legacy Demos (Các demo cũ)</h2>
+                <ul class="lessons-list">
+                    <li class="lesson-card glass-container">
+                        <a href="pigpen.html">
+                            <span class="lesson-number">Demo</span>
+                            <div class="lesson-content-wrapper">
+                                <span class="lesson-title">Pigpen Cypher (Original)</span>
+                                <span class="lesson-desc">Bản demo gốc</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="lesson-card glass-container">
+                        <a href="caesar.html">
+                            <span class="lesson-number">Demo</span>
+                            <div class="lesson-content-wrapper">
+                                <span class="lesson-title">Caesar Cypher (Original)</span>
+                                <span class="lesson-desc">Bản demo gốc</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="lesson-card glass-container">
+                        <a href="vignere.html">
+                            <span class="lesson-number">Demo</span>
+                            <div class="lesson-content-wrapper">
+                                <span class="lesson-title">Vigenère Cypher (Original)</span>
+                                <span class="lesson-desc">Bản demo gốc</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="lesson-card glass-container">
+                        <a href="symmetric.html">
+                            <span class="lesson-number">Demo</span>
+                            <div class="lesson-content-wrapper">
+                                <span class="lesson-title">Symmetric Key (Original)</span>
+                                <span class="lesson-desc">Bản demo gốc</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="lesson-card glass-container">
+                        <a href="asymmetric.html">
+                            <span class="lesson-number">Demo</span>
+                            <div class="lesson-content-wrapper">
+                                <span class="lesson-title">Asymmetric Key (Original)</span>
+                                <span class="lesson-desc">Bản demo gốc</span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+        </nav>
     </main>
 
+    <script src="js/lesson-core.js"></script>
+    <script>
+        // Initialize progress tracking on home page
+        LessonCore.init();
+        
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.querySelector('.particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Add ripple effect to buttons
+        function addRippleEffect() {
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('.lesson-card, .demo-btn, .quiz-submit, .btn-prev, .btn-next')) {
+                    const button = e.target.closest('.lesson-card, .demo-btn, .quiz-submit, .btn-prev, .btn-next');
+                    const ripple = document.createElement('span');
+                    const rect = button.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    ripple.className = 'ripple';
+                    ripple.style.width = ripple.style.height = size + 'px';
+                    ripple.style.left = x + 'px';
+                    ripple.style.top = y + 'px';
+                    
+                    button.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                }
+            });
+        }
+        
+        // Add staggered animation to lesson cards
+        function animateCards() {
+            const cards = document.querySelectorAll('.lesson-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = (index * 0.1) + 's';
+            });
+        }
+        
+        // Initialize enhanced features
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            addRippleEffect();
+            animateCards();
+        });
+    </script>
+    
+    <script>
+        // Mobile Navigation Toggle
+        (function() {
+            const hamburger = document.getElementById('hamburger');
+            const navbarMenu = document.getElementById('navbarMenu');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const body = document.body;
+            
+            // Toggle menu
+            function toggleMenu() {
+                hamburger.classList.toggle('active');
+                navbarMenu.classList.toggle('active');
+                body.classList.toggle('menu-open');
+            }
+            
+            // Hamburger click handler
+            if (hamburger) {
+                hamburger.addEventListener('click', toggleMenu);
+            }
+            
+            // Close menu when clicking on a link
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Smooth scroll to section
+                    const href = this.getAttribute('href');
+                    if (href && href.startsWith('#')) {
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if (target) {
+                            const offsetTop = target.offsetTop - 70; // Account for navbar height
+                            window.scrollTo({
+                                top: offsetTop,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                    
+                    // Close menu on mobile after clicking
+                    if (window.innerWidth <= 768) {
+                        setTimeout(() => {
+                            toggleMenu();
+                        }, 300);
+                    }
+                });
+            });
+            
+            // Close menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!hamburger || !navbarMenu) return;
+                const isClickInsideNav = navbarMenu.contains(e.target) || hamburger.contains(e.target);
+                
+                if (!isClickInsideNav && navbarMenu.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+            
+            // Close menu on window resize (if resized to desktop)
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768 && navbarMenu && navbarMenu.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+            
+            // Close menu on ESC key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && navbarMenu && navbarMenu.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+            
+            // Add active state to current section
+            function updateActiveNavLink() {
+                const sections = document.querySelectorAll('section[id], #progress-overview');
+                const scrollPos = window.scrollY + 100;
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.offsetHeight;
+                    const sectionId = section.getAttribute('id');
+                    
+                    if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${sectionId}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }
+            
+            // Update active link on scroll
+            window.addEventListener('scroll', updateActiveNavLink);
+            updateActiveNavLink(); // Initial call
+        })();
+    </script>
 </body>
-
 </html>

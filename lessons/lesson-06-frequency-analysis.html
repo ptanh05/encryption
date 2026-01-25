@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bài 6: Frequency Analysis</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/fontello.css">
+    <link rel="stylesheet" href="../css/design-system.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/lesson-styles.css">
+    <link rel="stylesheet" href="../css/animations.css">
+</head>
+<body class="lesson" data-lesson="6">
+    <nav class="lesson-nav">
+        <a href="../index.html">← Về trang chủ</a>
+        <div class="lesson-progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+    </nav>
+
+    <header class="lesson-header">
+        <h1>Bài 6: Frequency Analysis</h1>
+        <p class="lesson-meta">
+            <span>⏱️ Thời gian: ~30 phút</span>
+            <span>⭐ Độ khó: Trung bình</span>
+            <span>📚 Module 3: Phân tích và Tấn công</span>
+        </p>
+    </header>
+
+    <main class="lesson-content">
+        <section class="theory">
+            <h2>📖 Lý thuyết</h2>
+            
+            <h3>Frequency Analysis là gì?</h3>
+            <p>
+                <strong>Frequency Analysis</strong> (Phân tích tần suất) là kỹ thuật phá mã bằng cách 
+                phân tích tần suất xuất hiện của các ký tự trong ciphertext và so sánh với tần suất 
+                chuẩn của ngôn ngữ.
+            </p>
+
+            <h3>Tần suất chữ cái trong tiếng Anh</h3>
+            <p>Trong tiếng Anh, các chữ cái xuất hiện với tần suất khác nhau:</p>
+            <div class="frequency-chart-container">
+                <div id="english-frequency-chart" class="chart"></div>
+            </div>
+
+            <h3>Các kỹ thuật Frequency Analysis</h3>
+            <ul>
+                <li><strong>Single-letter frequency:</strong> Phân tích tần suất từng chữ cái</li>
+                <li><strong>Bigram frequency:</strong> Phân tích tần suất cặp chữ cái (TH, HE, IN, ...)</li>
+                <li><strong>Trigram frequency:</strong> Phân tích tần suất bộ ba chữ cái (THE, AND, ...)</li>
+                <li><strong>Word patterns:</strong> Phân tích độ dài từ và mẫu chữ cái</li>
+            </ul>
+
+            <h3>Chi-square Test</h3>
+            <p>
+                Chi-square test được sử dụng để đo độ tương đồng giữa tần suất quan sát được và 
+                tần suất kỳ vọng. Giá trị chi-square càng thấp, văn bản càng giống tiếng Anh.
+            </p>
+        </section>
+
+        <section class="interactive-demo">
+            <h2>🎮 Thử nghiệm</h2>
+            
+            <h3>Phân tích Ciphertext</h3>
+            <div class="demo-container">
+                <div class="demo-group">
+                    <label>Nhập ciphertext để phân tích:</label>
+                    <textarea id="analyze-input" rows="4" 
+                              placeholder="Nhập ciphertext..."></textarea>
+                </div>
+                <button class="demo-btn" onclick="analyzeFrequency()">Phân tích</button>
+                
+                <div id="analysis-results" style="margin-top: 1rem;">
+                    <h4>Tần suất chữ cái:</h4>
+                    <div id="frequency-chart" class="chart"></div>
+                    
+                    <h4>Gợi ý giải mã:</h4>
+                    <div id="decryption-suggestions"></div>
+                </div>
+            </div>
+
+            <h3>Auto-decrypt với Frequency Analysis</h3>
+            <div class="demo-container">
+                <div class="demo-group">
+                    <label>Ciphertext (Caesar Cipher):</label>
+                    <input type="text" id="auto-decrypt-input" 
+                           placeholder="Nhập ciphertext...">
+                </div>
+                <button class="demo-btn" onclick="autoDecrypt()">Tự động giải mã</button>
+                <div id="auto-decrypt-result" style="margin-top: 1rem;"></div>
+            </div>
+        </section>
+
+        <section class="quiz">
+            <h2>📝 Kiểm tra kiến thức</h2>
+            <div class="quiz-questions"></div>
+            <button class="quiz-submit">Nộp bài</button>
+            <div class="quiz-score"></div>
+        </section>
+
+        <section class="challenge">
+            <h2>🎯 Thử thách</h2>
+            <p>Hoàn thành các thử thách sau:</p>
+            <div class="challenges-list"></div>
+        </section>
+    </main>
+
+    <footer class="lesson-footer">
+        <button class="btn-prev" onclick="window.location.href='lesson-05-vigenere.html'">← Bài trước</button>
+        <button class="btn-next" onclick="window.location.href='lesson-07-cryptanalysis.html'">Bài tiếp theo →</button>
+    </footer>
+
+    <script src="../js/crypt-util.js"></script>
+    <script src="../js/lesson-core.js"></script>
+    <script>
+        LessonCore.currentLesson = 6;
+        LessonCore.updateLessonProgressBar();
+        QuizSystem.init(6);
+        ChallengeSystem.init(6);
+
+        // English letter frequencies
+        const englishFreq = {
+            'E': 12.02, 'T': 9.10, 'A': 8.12, 'O': 7.68, 'I': 7.31,
+            'N': 6.95, 'S': 6.28, 'R': 6.02, 'H': 5.92, 'D': 4.32,
+            'L': 3.98, 'U': 2.88, 'C': 2.71, 'M': 2.61, 'F': 2.30,
+            'Y': 2.11, 'W': 2.09, 'G': 2.03, 'P': 1.82, 'B': 1.49,
+            'V': 1.11, 'K': 0.69, 'X': 0.17, 'Q': 0.11, 'J': 0.10, 'Z': 0.07
+        };
+
+        function analyzeFrequency() {
+            const text = document.getElementById('analyze-input').value.toUpperCase();
+            if (!text) return;
+
+            const counts = {};
+            let total = 0;
+
+            for (let char of text) {
+                if (char >= 'A' && char <= 'Z') {
+                    counts[char] = (counts[char] || 0) + 1;
+                    total++;
+                }
+            }
+
+            const frequencies = {};
+            for (let letter = 'A'; letter <= 'Z'; letter = String.fromCharCode(letter.charCodeAt(0) + 1)) {
+                frequencies[letter] = counts[letter] ? (counts[letter] / total * 100) : 0;
+            }
+
+            // Display chart
+            displayFrequencyChart('frequency-chart', frequencies);
+            
+            // Suggestions
+            const suggestions = document.getElementById('decryption-suggestions');
+            suggestions.innerHTML = '<p>So sánh với tần suất tiếng Anh để tìm mapping...</p>';
+        }
+
+        function displayFrequencyChart(containerId, frequencies) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            
+            const maxFreq = Math.max(...Object.values(frequencies));
+            
+            for (let letter = 'A'; letter <= 'Z'; letter = String.fromCharCode(letter.charCodeAt(0) + 1)) {
+                const bar = document.createElement('div');
+                bar.style.display = 'inline-block';
+                bar.style.width = '3%';
+                bar.style.margin = '0 0.2%';
+                bar.style.verticalAlign = 'bottom';
+                bar.style.background = 'var(--accent)';
+                bar.style.height = (frequencies[letter] / maxFreq * 200) + 'px';
+                bar.title = `${letter}: ${frequencies[letter].toFixed(2)}%`;
+                container.appendChild(bar);
+            }
+        }
+
+        function autoDecrypt() {
+            const ciphertext = document.getElementById('auto-decrypt-input').value.toUpperCase();
+            if (!ciphertext) return;
+
+            let bestShift = 0;
+            let bestScore = Infinity;
+
+            // Try all shifts and find best match
+            for (let shift = 0; shift < 26; shift++) {
+                let plaintext = '';
+                for (let char of ciphertext) {
+                    if (char >= 'A' && char <= 'Z') {
+                        const shifted = ((char.charCodeAt(0) - 65 - shift + 26) % 26) + 65;
+                        plaintext += String.fromCharCode(shifted);
+                    } else {
+                        plaintext += char;
+                    }
+                }
+
+                // Calculate chi-square
+                const score = calculateChiSquare(plaintext);
+                if (score < bestScore) {
+                    bestScore = score;
+                    bestShift = shift;
+                }
+            }
+
+            // Decrypt with best shift
+            let result = '';
+            for (let char of ciphertext) {
+                if (char >= 'A' && char <= 'Z') {
+                    const shifted = ((char.charCodeAt(0) - 65 - bestShift + 26) % 26) + 65;
+                    result += String.fromCharCode(shifted);
+                } else {
+                    result += char;
+                }
+            }
+
+            document.getElementById('auto-decrypt-result').innerHTML = 
+                `<strong>Plaintext (shift=${bestShift}):</strong> ${result}`;
+        }
+
+        function calculateChiSquare(text) {
+            const counts = {};
+            let total = 0;
+
+            for (let char of text) {
+                if (char >= 'A' && char <= 'Z') {
+                    counts[char] = (counts[char] || 0) + 1;
+                    total++;
+                }
+            }
+
+            let chiSquare = 0;
+            for (let letter = 'A'; letter <= 'Z'; letter = String.fromCharCode(letter.charCodeAt(0) + 1)) {
+                const observed = counts[letter] || 0;
+                const expected = (englishFreq[letter] / 100) * total;
+                chiSquare += Math.pow(observed - expected, 2) / expected;
+            }
+
+            return chiSquare;
+        }
+
+        // Display English frequency on load
+        window.addEventListener('load', () => {
+            displayFrequencyChart('english-frequency-chart', englishFreq);
+        });
+
+        const originalCheck = QuizSystem.checkAnswers.bind(QuizSystem);
+        QuizSystem.checkAnswers = function() {
+            const score = originalCheck();
+            if (score >= 70) {
+                LessonCore.markLessonComplete(6, score);
+            }
+        };
+    </script>
+    
+    <style>
+        .frequency-chart-container {
+            margin: 1rem 0;
+            padding: 1rem;
+            background: var(--border-dark);
+            border-radius: 0.3rem;
+        }
+    </style>
+</body>
+</html>
+

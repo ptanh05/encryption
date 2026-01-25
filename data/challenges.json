@@ -1,0 +1,41 @@
+{
+  "3": [
+    {
+      "title": "Giải mã Pigpen",
+      "description": "Giải mã thông điệp sau sử dụng Pigpen Cipher: [Sẽ được hiển thị trong demo]",
+      "answer": "HELLO",
+      "hint": "Sử dụng bảng tra cứu Pigpen"
+    }
+  ],
+  "4": [
+    {
+      "title": "Phá mã Caesar",
+      "description": "Giải mã: 'KHOOR ZRUOG' với shift = 3",
+      "answer": "HELLO WORLD",
+      "hint": "Dịch ngược lại 3 vị trí"
+    },
+    {
+      "title": "Tìm shift key",
+      "description": "Plaintext: 'ATTACK', Ciphertext: 'DWWDFN'. Tìm shift key?",
+      "answer": "3",
+      "hint": "So sánh A với D"
+    }
+  ],
+  "5": [
+    {
+      "title": "Giải mã Vigenère",
+      "description": "Ciphertext: 'LXFOPVEFRNHR', Key: 'LEMON'. Tìm plaintext?",
+      "answer": "ATTACKATDAWN",
+      "hint": "Sử dụng Vigenère table với key stream LEMONLEMONLE"
+    }
+  ],
+  "6": [
+    {
+      "title": "Frequency Analysis",
+      "description": "Phân tích và giải mã ciphertext có tần suất chữ E cao nhất",
+      "answer": "THEQUICKBROWNFOX",
+      "hint": "E là chữ cái phổ biến nhất trong tiếng Anh"
+    }
+  ]
+}
+

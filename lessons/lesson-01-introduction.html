@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bài 1: Giới thiệu về Mật mã học</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/fontello.css">
+    <link rel="stylesheet" href="../css/design-system.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/lesson-styles.css">
+    <link rel="stylesheet" href="../css/animations.css">
+</head>
+<body class="lesson" data-lesson="1">
+    <nav class="lesson-nav">
+        <a href="../index.html">← Về trang chủ</a>
+        <div class="lesson-progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+    </nav>
+
+    <header class="lesson-header">
+        <h1>Bài 1: Giới thiệu về Mật mã học</h1>
+        <p class="lesson-meta">
+            <span>⏱️ Thời gian: ~15 phút</span>
+            <span>⭐ Độ khó: Dễ</span>
+            <span>📚 Module 1: Giới thiệu và Nền tảng</span>
+        </p>
+    </header>
+
+    <main class="lesson-content">
+        <section class="theory">
+            <h2>📖 Lý thuyết</h2>
+            
+            <h3>Mật mã học là gì?</h3>
+            <p>
+                <strong>Mật mã học (Cryptography)</strong> là khoa học và nghệ thuật viết và giải mã thông điệp 
+                để đảm bảo tính bảo mật, toàn vẹn và xác thực của thông tin. Từ "cryptography" xuất phát từ 
+                tiếng Hy Lạp: <em>kryptós</em> (ẩn giấu) và <em>graphein</em> (viết).
+            </p>
+
+            <h3>Lịch sử phát triển</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <strong>2000 TCN:</strong> Người Ai Cập sử dụng hieroglyphics không chuẩn
+                </div>
+                <div class="timeline-item">
+                    <strong>100 TCN:</strong> Julius Caesar sử dụng Caesar Cipher
+                </div>
+                <div class="timeline-item">
+                    <strong>1586:</strong> Blaise de Vigenère phát minh Vigenère Cipher
+                </div>
+                <div class="timeline-item">
+                    <strong>1918:</strong> Enigma machine được phát minh
+                </div>
+                <div class="timeline-item">
+                    <strong>1976:</strong> Diffie-Hellman key exchange - khởi đầu của mật mã học hiện đại
+                </div>
+                <div class="timeline-item">
+                    <strong>1977:</strong> RSA algorithm được công bố
+                </div>
+                <div class="timeline-item">
+                    <strong>2001:</strong> AES (Advanced Encryption Standard) được chấp nhận
+                </div>
+            </div>
+
+            <h3>Các thuật ngữ cơ bản</h3>
+            <dl class="glossary">
+                <dt><strong>Plaintext (Văn bản gốc):</strong></dt>
+                <dd>Thông điệp ban đầu, chưa được mã hóa</dd>
+
+                <dt><strong>Ciphertext (Văn bản mã hóa):</strong></dt>
+                <dd>Thông điệp đã được mã hóa, không thể đọc được</dd>
+
+                <dt><strong>Encryption (Mã hóa):</strong></dt>
+                <dd>Quá trình chuyển đổi plaintext thành ciphertext</dd>
+
+                <dt><strong>Decryption (Giải mã):</strong></dt>
+                <dd>Quá trình chuyển đổi ciphertext về plaintext</dd>
+
+                <dt><strong>Key (Khóa):</strong></dt>
+                <dd>Thông tin bí mật dùng để mã hóa và giải mã</dd>
+
+                <dt><strong>Cipher (Thuật toán mã hóa):</strong></dt>
+                <dd>Phương pháp hoặc thuật toán để mã hóa và giải mã</dd>
+
+                <dt><strong>Cryptanalysis (Phân tích mật mã):</strong></dt>
+                <dd>Khoa học nghiên cứu cách phá mã mà không cần biết khóa</dd>
+            </dl>
+
+            <h3>Ứng dụng trong đời sống</h3>
+            <ul>
+                <li><strong>HTTPS:</strong> Bảo vệ thông tin khi duyệt web</li>
+                <li><strong>Email:</strong> Mã hóa email để bảo mật</li>
+                <li><strong>Ngân hàng:</strong> Bảo vệ giao dịch tài chính</li>
+                <li><strong>Blockchain:</strong> Nền tảng của Bitcoin và cryptocurrency</li>
+                <li><strong>Mật khẩu:</strong> Hash và salt để lưu trữ an toàn</li>
+                <li><strong>VPN:</strong> Mã hóa kết nối internet</li>
+            </ul>
+        </section>
+
+        <section class="interactive-demo">
+            <h2>🎮 Thử nghiệm</h2>
+            <p>Hãy thử mã hóa một thông điệp đơn giản:</p>
+            
+            <div class="demo-container">
+                <div class="demo-group">
+                    <label>Plaintext (Văn bản gốc):</label>
+                    <input type="text" id="demo-plaintext" class="demo-input" 
+                           placeholder="Nhập thông điệp của bạn..." 
+                           value="HELLO WORLD">
+                </div>
+                
+                <div class="demo-group">
+                    <label>Simple Cipher (Mã hóa đơn giản - Shift +3):</label>
+                    <input type="text" id="demo-ciphertext" class="demo-input" 
+                           readonly>
+                </div>
+                
+                <button class="demo-btn" onclick="demoEncrypt()">Mã hóa</button>
+                <button class="demo-btn" onclick="demoDecrypt()">Giải mã</button>
+            </div>
+        </section>
+
+        <section class="quiz">
+            <h2>📝 Kiểm tra kiến thức</h2>
+            <div class="quiz-questions"></div>
+            <button class="quiz-submit">Nộp bài</button>
+            <div class="quiz-score"></div>
+        </section>
+
+        <section class="challenge">
+            <h2>🎯 Thử thách</h2>
+            <p>Hoàn thành các thử thách sau để nắm vững kiến thức:</p>
+            <div class="challenges-list"></div>
+        </section>
+    </main>
+
+    <footer class="lesson-footer">
+        <button class="btn-prev" disabled>← Bài trước</button>
+        <button class="btn-next" onclick="window.location.href='lesson-02-fundamentals.html'">Bài tiếp theo →</button>
+    </footer>
+
+    <script src="../js/crypt-util.js"></script>
+    <script src="../js/lesson-core.js"></script>
+    <script>
+        // Initialize lesson
+        LessonCore.currentLesson = 1;
+        LessonCore.updateLessonProgressBar();
+        
+        // Initialize quiz and challenges
+        QuizSystem.init(1);
+        ChallengeSystem.init(1);
+
+        // Demo encryption
+        function demoEncrypt() {
+            const plaintext = document.getElementById('demo-plaintext').value.toUpperCase();
+            let ciphertext = '';
+            
+            for (let i = 0; i < plaintext.length; i++) {
+                const char = plaintext[i];
+                if (char >= 'A' && char <= 'Z') {
+                    const shifted = ((char.charCodeAt(0) - 65 + 3) % 26) + 65;
+                    ciphertext += String.fromCharCode(shifted);
+                } else {
+                    ciphertext += char;
+                }
+            }
+            
+            document.getElementById('demo-ciphertext').value = ciphertext;
+        }
+
+        function demoDecrypt() {
+            const ciphertext = document.getElementById('demo-ciphertext').value.toUpperCase();
+            let plaintext = '';
+            
+            for (let i = 0; i < ciphertext.length; i++) {
+                const char = ciphertext[i];
+                if (char >= 'A' && char <= 'Z') {
+                    const shifted = ((char.charCodeAt(0) - 65 - 3 + 26) % 26) + 65;
+                    plaintext += String.fromCharCode(shifted);
+                } else {
+                    plaintext += char;
+                }
+            }
+            
+            document.getElementById('demo-plaintext').value = plaintext;
+        }
+
+        // Auto-encrypt on input
+        document.getElementById('demo-plaintext').addEventListener('input', demoEncrypt);
+        
+        // Mark lesson complete when quiz passed
+        const originalCheck = QuizSystem.checkAnswers.bind(QuizSystem);
+        QuizSystem.checkAnswers = function() {
+            const score = originalCheck();
+            if (score >= 70) {
+                LessonCore.markLessonComplete(1, score);
+            }
+        };
+    </script>
+    
+    <style>
+        .timeline {
+            margin: 1rem 0;
+            padding-left: 2rem;
+            border-left: 3px solid var(--accent);
+        }
+        
+        .timeline-item {
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            background: var(--border-dark);
+            border-radius: 0.3rem;
+        }
+        
+        .glossary {
+            margin: 1rem 0;
+        }
+        
+        .glossary dt {
+            margin-top: 1rem;
+            color: var(--accent);
+        }
+        
+        .glossary dd {
+            margin-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .demo-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .demo-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .demo-input {
+            padding: 0.8rem;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1.1rem;
+        }
+        
+        .demo-btn {
+            padding: 0.8rem;
+            background: var(--accent);
+            color: var(--text-inv);
+            border: none;
+            border-radius: 0.3rem;
+            cursor: pointer;
+            font-family: 'Share Tech', sans-serif;
+            font-size: 1rem;
+        }
+        
+        .demo-btn:hover {
+            background: var(--text);
+            color: var(--back);
+        }
+    </style>
+</body>
+</html>
+

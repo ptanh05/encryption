@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bài 4: Caesar Cipher</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/fontello.css">
+    <link rel="stylesheet" href="../css/design-system.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/lesson-styles.css">
+    <link rel="stylesheet" href="../css/animations.css">
+</head>
+<body class="lesson scheme-caesar" data-lesson="4" onload="setup( CAESAR );">
+    <nav class="lesson-nav">
+        <a href="../index.html">← Về trang chủ</a>
+        <div class="lesson-progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+    </nav>
+
+    <header class="lesson-header">
+        <h1>Bài 4: Caesar Cipher <a target="_blank" href="https://en.wikipedia.org/wiki/Caesar_cipher"><i class="icon-link-ext"></i></a></h1>
+        <p class="lesson-meta">
+            <span>⏱️ Thời gian: ~20 phút</span>
+            <span>⭐ Độ khó: Dễ</span>
+            <span>📚 Module 2: Mã hóa Cổ điển</span>
+        </p>
+    </header>
+
+    <main class="lesson-content">
+        <section class="theory">
+            <h2>📖 Lý thuyết</h2>
+            
+            <h3>Lịch sử</h3>
+            <p>
+                <strong>Caesar Cipher</strong> là một trong những phương pháp mã hóa lâu đời nhất, 
+                được sử dụng bởi Julius Caesar hơn 2000 năm trước để gửi thông điệp bí mật cho 
+                các chỉ huy quân đội của mình.
+            </p>
+
+            <h3>Cách hoạt động</h3>
+            <p>
+                Caesar Cipher là một dạng <strong>substitution cipher</strong> đơn giản, dịch chuyển 
+                mỗi chữ cái trong bảng chữ cái đi một số vị trí cố định (gọi là "shift" hoặc "key").
+            </p>
+
+            <div class="example-box">
+                <strong>Ví dụ với shift = 3:</strong>
+                <br>Plaintext:  A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+                <br>Ciphertext: D E F G H I J K L M N O P Q R S T U V W X Y Z A B C
+                <br>
+                <br>"HELLO" → "KHOOR"
+            </div>
+
+            <h3>ROT-13</h3>
+            <p>
+                ROT-13 là một trường hợp đặc biệt của Caesar Cipher với shift = 13. Vì bảng chữ cái 
+                có 26 chữ cái, nên mã hóa 2 lần với ROT-13 sẽ trả về văn bản gốc (tự đảo ngược).
+            </p>
+
+            <h3>Brute Force Attack</h3>
+            <p>
+                Caesar Cipher rất dễ bị tấn công bằng phương pháp brute force vì chỉ có 25 khả năng 
+                shift (0-25). Kẻ tấn công chỉ cần thử từng khả năng cho đến khi tìm ra văn bản có nghĩa.
+            </p>
+
+            <div class="demo-container" style="margin: 1rem 0;">
+                <h4>Thử Brute Force:</h4>
+                <input type="text" id="brute-input" placeholder="Nhập ciphertext..." 
+                       style="width: 100%; padding: 0.5rem; margin-bottom: 0.5rem;">
+                <button onclick="bruteForce()" class="demo-btn">Thử tất cả 25 khả năng</button>
+                <div id="brute-results" style="margin-top: 1rem;"></div>
+            </div>
+        </section>
+
+        <section class="interactive-demo">
+            <h2>🎮 Thử nghiệm</h2>
+            
+            <div id="inputs">
+                <div id="plaintext" class="group">
+                    <h3>Plain Text</h3>
+                    <input type="text" id="plaintext-text" class="plaintext-text">
+                </div>
+
+                <div id="options" class="group">
+                    <h3 class="key">Key (Shift)</h3>
+                    <input type="number" id="key-value" class="key-value" value="0" min="0" max="25">
+                </div>
+        
+                <div id="cyphertext" class="group">
+                    <h3 class="cypher">Cypher Text</h3>
+                    <input type="text" id="cyphertext-text" class="cyphertext-text">
+                </div>
+            </div>
+
+            <section id="encryption">
+                <h2>Encryption System</h2>
+                
+                <div id="crypt-plaintext" class="group block">
+                    <h3>Plain Letter</h3>
+                    <div id="plaintext-chars" class="grid"></div>
+                </div>
+
+                <div id="crypt-mapping" class="group block">
+                    <h3 id="mapping-direction">Encrypts To</h3>
+                    <div id="mapping" class="grid"></div>
+                </div>
+
+                <div id="crypt-cyphertext" class="group block">
+                    <h3 class="cypher">Cypher Letter</h3>
+                    <div id="cyphertext-chars" class="grid"></div>
+                </div>
+            </section>
+
+            <section id="charts">
+                <h2>Frequency Analysis</h2>
+
+                <div id="plaintext-freq" class="group">
+                    <h3>Plain Text Letter Frequency</h3>
+                    <div id="plaintext-chart" class="chart"></div>
+                </div>
+
+                <div id="cyphertext-freq" class="group">
+                    <h3 class="cypher">Cypher Text Letter Frequency</h3>
+                    <div id="cyphertext-chart" class="chart"></div>
+                </div>
+            </section>
+        </section>
+
+        <section class="quiz">
+            <h2>📝 Kiểm tra kiến thức</h2>
+            <div class="quiz-questions"></div>
+            <button class="quiz-submit">Nộp bài</button>
+            <div class="quiz-score"></div>
+        </section>
+
+        <section class="challenge">
+            <h2>🎯 Thử thách</h2>
+            <p>Hoàn thành các thử thách sau:</p>
+            <div class="challenges-list"></div>
+        </section>
+    </main>
+
+    <footer class="lesson-footer">
+        <button class="btn-prev" onclick="window.location.href='lesson-03-pigpen.html'">← Bài trước</button>
+        <button class="btn-next" onclick="window.location.href='lesson-05-vigenere.html'">Bài tiếp theo →</button>
+    </footer>
+
+    <script src="../js/crypt-util.js"></script>
+    <script src="../js/crypt-simple.js"></script>
+    <script src="../js/lesson-core.js"></script>
+    <script>
+        LessonCore.currentLesson = 4;
+        LessonCore.updateLessonProgressBar();
+        QuizSystem.init(4);
+        ChallengeSystem.init(4);
+
+        function bruteForce() {
+            const ciphertext = document.getElementById('brute-input').value.toUpperCase();
+            if (!ciphertext) return;
+
+            const results = document.getElementById('brute-results');
+            results.innerHTML = '<h4>Tất cả các khả năng:</h4>';
+
+            for (let shift = 0; shift < 26; shift++) {
+                let plaintext = '';
+                for (let i = 0; i < ciphertext.length; i++) {
+                    const char = ciphertext[i];
+                    if (char >= 'A' && char <= 'Z') {
+                        const shifted = ((char.charCodeAt(0) - 65 - shift + 26) % 26) + 65;
+                        plaintext += String.fromCharCode(shifted);
+                    } else {
+                        plaintext += char;
+                    }
+                }
+                const div = document.createElement('div');
+                div.style.padding = '0.5rem';
+                div.style.margin = '0.3rem 0';
+                div.style.background = shift % 2 === 0 ? 'var(--border-dark)' : 'var(--back-high)';
+                div.innerHTML = `<strong>Shift ${shift}:</strong> ${plaintext}`;
+                results.appendChild(div);
+            }
+        }
+
+        const originalCheck = QuizSystem.checkAnswers.bind(QuizSystem);
+        QuizSystem.checkAnswers = function() {
+            const score = originalCheck();
+            if (score >= 70) {
+                LessonCore.markLessonComplete(4, score);
+            }
+        };
+    </script>
+</body>
+</html>
+

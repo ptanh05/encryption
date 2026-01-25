@@ -1,0 +1,93 @@
+{
+  "lessons": [
+    {
+      "id": 1,
+      "title": "Giới thiệu về Mật mã học",
+      "description": "Tìm hiểu lịch sử và khái niệm cơ bản về mật mã học",
+      "duration": "15 phút",
+      "difficulty": "Dễ",
+      "module": 1
+    },
+    {
+      "id": 2,
+      "title": "Các khái niệm cơ bản",
+      "description": "Substitution, Transposition, Key space và các nguyên lý cơ bản",
+      "duration": "20 phút",
+      "difficulty": "Dễ",
+      "module": 1
+    },
+    {
+      "id": 3,
+      "title": "Pigpen Cipher",
+      "description": "Mã hóa hình học của Freemasons",
+      "duration": "15 phút",
+      "difficulty": "Dễ",
+      "module": 2
+    },
+    {
+      "id": 4,
+      "title": "Caesar Cipher",
+      "description": "Mã hóa dịch chuyển đơn giản",
+      "duration": "20 phút",
+      "difficulty": "Dễ",
+      "module": 2
+    },
+    {
+      "id": 5,
+      "title": "Vigenère Cipher",
+      "description": "Mã hóa đa bảng chữ cái với key stream",
+      "duration": "25 phút",
+      "difficulty": "Trung bình",
+      "module": 2
+    },
+    {
+      "id": 6,
+      "title": "Frequency Analysis",
+      "description": "Phân tích tần suất ký tự để phá mã",
+      "duration": "30 phút",
+      "difficulty": "Trung bình",
+      "module": 3
+    },
+    {
+      "id": 7,
+      "title": "Cryptanalysis Techniques",
+      "description": "Các kỹ thuật tấn công mã hóa",
+      "duration": "35 phút",
+      "difficulty": "Khó",
+      "module": 3
+    },
+    {
+      "id": 8,
+      "title": "Symmetric Key Cryptography",
+      "description": "Mã hóa đối xứng và vấn đề phân phối khóa",
+      "duration": "30 phút",
+      "difficulty": "Trung bình",
+      "module": 4
+    },
+    {
+      "id": 9,
+      "title": "Asymmetric Public-Key Cryptography",
+      "description": "Mã hóa bất đối xứng và giải quyết vấn đề phân phối khóa",
+      "duration": "35 phút",
+      "difficulty": "Khó",
+      "module": 4
+    },
+    {
+      "id": 10,
+      "title": "Hash Functions & Digital Signatures",
+      "description": "Hàm băm và chữ ký số",
+      "duration": "30 phút",
+      "difficulty": "Trung bình",
+      "module": 4
+    },
+    {
+      "id": 11,
+      "title": "Ứng dụng thực tế",
+      "description": "HTTPS, TLS, Blockchain và các ứng dụng trong thực tế",
+      "duration": "40 phút",
+      "difficulty": "Khó",
+      "module": 5
+    }
+  ]
+}
+

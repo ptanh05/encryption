@@ -1,24 +1,74 @@
-# Encryption Demos
+# 🔐 Cryptography Learning Platform
 
-## Simple Crypto
+Interactive educational website for learning cryptography with 11 lessons from basics to advanced.
 
-Some interactive demos of simple symmetric key substitution cyphers:
+## 🚀 Quick Start
 
-- Pigpen Cypher
-- Caesar Cypher
-- Vignère Cypher
+### Run Locally
 
-Text can be enetered into either the plaintext or cyphertext inputs, keys adjusted, etc. The encryption system is shown and updates as text is typed. 
+```bash
+# Option 1: Node.js (Recommended)
+npx http-server -p 8080 -o
 
-Also shown is a letter frequency chart to help show how each scheme would be susceptible / resist a frequency analysis attack.
+# Option 2: Python
+python -m http.server 8080
 
-## Modern Crypto
+# Option 3: Use start script
+# Windows: start-server.bat
+# Linux/Mac: ./start-server.sh
+```
 
-Demos of modern symmetric and asymmetric (public-key) crypto.
+Then open: **http://localhost:8080**
 
-The demo show the key distribution, and how this can be problematic for symmetric key schemes, where an eavesdropper can compromise the system. But then shows how this issue is solved in the case of public-key, asymmetric crypto.
+> ⚠️ **Note:** Must run via local server (uses `fetch()` API)
 
-## Demo
+## 📚 Course Structure
 
-https://waimea-dt.github.io/encryption/
+- **Module 1:** Introduction & Fundamentals (2 lessons)
+- **Module 2:** Classical Encryption (3 lessons)
+- **Module 3:** Cryptanalysis (2 lessons)
+- **Module 4:** Modern Cryptography (3 lessons)
+- **Module 5:** Real-world Applications (1 lesson)
 
+**Total: 11 Interactive Lessons**
+
+## ✨ Features
+
+- 📊 Progress Tracking
+- 🎮 Interactive Demos
+- 📝 Quiz System
+- 🎯 Challenges
+- 📈 Frequency Analysis
+- 🔐 Modern Crypto (Symmetric/Asymmetric)
+
+## 🛠️ Tech Stack
+
+- HTML5/CSS3
+- Vanilla JavaScript
+- TweetNaCl (Modern Crypto)
+- LocalStorage (Progress)
+
+## 📖 Documentation
+
+See `docs/` folder for detailed documentation:
+- `docs/README.md` - Full documentation
+- `docs/HUONG_DAN_CHAY.md` - Running guide (Vietnamese)
+- `docs/DEPLOY_VERCEL.md` - Deployment guide
+
+## 🌐 Deploy
+
+Ready for deployment on:
+- ✅ Vercel
+- ✅ GitHub Pages
+- ✅ Netlify
+- ✅ Any static hosting
+
+See `docs/DEPLOY_VERCEL.md` for details.
+
+## 📄 License
+
+Educational purpose only.
+
+---
+
+**Happy Learning! 🎓**

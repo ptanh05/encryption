@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bài 2: Các khái niệm cơ bản</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/fontello.css">
+    <link rel="stylesheet" href="../css/design-system.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/lesson-styles.css">
+    <link rel="stylesheet" href="../css/animations.css">
+</head>
+<body class="lesson" data-lesson="2">
+    <nav class="lesson-nav">
+        <a href="../index.html">← Về trang chủ</a>
+        <div class="lesson-progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+    </nav>
+
+    <header class="lesson-header">
+        <h1>Bài 2: Các khái niệm cơ bản</h1>
+        <p class="lesson-meta">
+            <span>⏱️ Thời gian: ~20 phút</span>
+            <span>⭐ Độ khó: Dễ</span>
+            <span>📚 Module 1: Giới thiệu và Nền tảng</span>
+        </p>
+    </header>
+
+    <main class="lesson-content">
+        <section class="theory">
+            <h2>📖 Lý thuyết</h2>
+            
+            <h3>1. Substitution vs Transposition</h3>
+            
+            <h4>Substitution Cipher (Mã hóa thay thế)</h4>
+            <p>
+                Thay thế từng ký tự trong plaintext bằng một ký tự khác theo quy tắc nhất định.
+            </p>
+            <div class="example-box">
+                <strong>Ví dụ:</strong> A → D, B → E, C → F, ...
+                <br>Plaintext: "HELLO" → Ciphertext: "KHOOR"
+            </div>
+
+            <h4>Transposition Cipher (Mã hóa hoán vị)</h4>
+            <p>
+                Giữ nguyên các ký tự nhưng thay đổi vị trí của chúng.
+            </p>
+            <div class="example-box">
+                <strong>Ví dụ:</strong> Viết theo cột, đọc theo hàng
+                <br>Plaintext: "HELLO WORLD"
+                <br>Viết: H E L L O<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;W O R L D
+                <br>Đọc: "HW E O L R L L O D"
+            </div>
+
+            <h3>2. Symmetric vs Asymmetric Cryptography</h3>
+            
+            <h4>Symmetric Key (Mã hóa đối xứng)</h4>
+            <ul>
+                <li>Cùng một khóa để mã hóa và giải mã</li>
+                <li>Nhanh và hiệu quả</li>
+                <li><strong>Vấn đề:</strong> Phải chia sẻ khóa bí mật trước</li>
+                <li><strong>Ví dụ:</strong> AES, DES, Caesar Cipher</li>
+            </ul>
+
+            <h4>Asymmetric Key (Mã hóa bất đối xứng)</h4>
+            <ul>
+                <li>Sử dụng cặp khóa: Public Key và Private Key</li>
+                <li>Public Key có thể công khai</li>
+                <li>Giải quyết vấn đề phân phối khóa</li>
+                <li><strong>Ví dụ:</strong> RSA, ECC, Diffie-Hellman</li>
+            </ul>
+
+            <h3>3. Key Space (Không gian khóa)</h3>
+            <p>
+                Key space là tập hợp tất cả các khóa có thể sử dụng trong một hệ thống mã hóa.
+            </p>
+            <div class="example-box">
+                <strong>Caesar Cipher:</strong> Key space = 26 (có 26 cách dịch chuyển)
+                <br><strong>Vigenère với key dài 5:</strong> Key space = 26<sup>5</sup> = 11,881,376
+                <br><strong>AES-256:</strong> Key space = 2<sup>256</sup> (rất lớn!)
+            </div>
+
+            <h3>4. Security Levels (Mức độ bảo mật)</h3>
+            <table class="security-table">
+                <thead>
+                    <tr>
+                        <th>Mức độ</th>
+                        <th>Mô tả</th>
+                        <th>Ví dụ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Không an toàn</td>
+                        <td>Dễ dàng bị phá trong vài phút</td>
+                        <td>Caesar Cipher</td>
+                    </tr>
+                    <tr>
+                        <td>Yếu</td>
+                        <td>Có thể phá với công cụ tự động</td>
+                        <td>Vigenère với key ngắn</td>
+                    </tr>
+                    <tr>
+                        <td>Trung bình</td>
+                        <td>Cần thời gian và tài nguyên</td>
+                        <td>DES (đã lỗi thời)</td>
+                    </tr>
+                    <tr>
+                        <td>Mạnh</td>
+                        <td>Rất khó phá, cần thời gian dài</td>
+                        <td>AES-256, RSA-2048</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>5. Entropy (Entropy)</h3>
+            <p>
+                Entropy đo độ ngẫu nhiên và không thể đoán trước của thông tin. 
+                Entropy càng cao, khóa càng an toàn.
+            </p>
+            <div class="example-box">
+                <strong>Khóa yếu:</strong> "PASSWORD" (entropy thấp, dễ đoán)
+                <br><strong>Khóa mạnh:</strong> "Xk9#mP2$vL8@qR5" (entropy cao, ngẫu nhiên)
+            </div>
+        </section>
+
+        <section class="interactive-demo">
+            <h2>🎮 Thử nghiệm</h2>
+            
+            <h3>So sánh Key Space</h3>
+            <div class="demo-container">
+                <div class="demo-group">
+                    <label>Chọn loại mã hóa:</label>
+                    <select id="cipher-type" onchange="updateKeySpace()">
+                        <option value="caesar">Caesar Cipher</option>
+                        <option value="vigenere3">Vigenère (key dài 3)</option>
+                        <option value="vigenere5">Vigenère (key dài 5)</option>
+                        <option value="aes128">AES-128</option>
+                        <option value="aes256">AES-256</option>
+                    </select>
+                </div>
+                
+                <div class="demo-result">
+                    <strong>Key Space:</strong> <span id="key-space">26</span>
+                    <br><strong>Độ an toàn:</strong> <span id="security-level">Yếu</span>
+                </div>
+            </div>
+
+            <h3>Entropy Calculator</h3>
+            <div class="demo-container">
+                <div class="demo-group">
+                    <label>Nhập khóa để kiểm tra entropy:</label>
+                    <input type="text" id="entropy-input" 
+                           placeholder="Nhập khóa..." 
+                           oninput="calculateEntropy()">
+                </div>
+                
+                <div class="demo-result">
+                    <strong>Entropy:</strong> <span id="entropy-value">0</span> bits
+                    <br><strong>Đánh giá:</strong> <span id="entropy-rating">-</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="quiz">
+            <h2>📝 Kiểm tra kiến thức</h2>
+            <div class="quiz-questions"></div>
+            <button class="quiz-submit">Nộp bài</button>
+            <div class="quiz-score"></div>
+        </section>
+    </main>
+
+    <footer class="lesson-footer">
+        <button class="btn-prev" onclick="window.location.href='lesson-01-introduction.html'">← Bài trước</button>
+        <button class="btn-next" onclick="window.location.href='lesson-03-pigpen.html'">Bài tiếp theo →</button>
+    </footer>
+
+    <script src="../js/crypt-util.js"></script>
+    <script src="../js/lesson-core.js"></script>
+    <script>
+        LessonCore.currentLesson = 2;
+        LessonCore.updateLessonProgressBar();
+        QuizSystem.init(2);
+
+        const keySpaces = {
+            caesar: { space: 26, level: "Yếu" },
+            vigenere3: { space: Math.pow(26, 3), level: "Trung bình" },
+            vigenere5: { space: Math.pow(26, 5), level: "Khá" },
+            aes128: { space: "2^128", level: "Rất mạnh" },
+            aes256: { space: "2^256", level: "Cực kỳ mạnh" }
+        };
+
+        function updateKeySpace() {
+            const type = document.getElementById('cipher-type').value;
+            const info = keySpaces[type];
+            document.getElementById('key-space').textContent = 
+                typeof info.space === 'number' ? info.space.toLocaleString() : info.space;
+            document.getElementById('security-level').textContent = info.level;
+        }
+
+        function calculateEntropy() {
+            const input = document.getElementById('entropy-input').value;
+            if (!input) {
+                document.getElementById('entropy-value').textContent = '0';
+                document.getElementById('entropy-rating').textContent = '-';
+                return;
+            }
+
+            // Simple entropy calculation
+            const chars = {};
+            for (let char of input) {
+                chars[char] = (chars[char] || 0) + 1;
+            }
+
+            let entropy = 0;
+            const length = input.length;
+            for (let count of Object.values(chars)) {
+                const p = count / length;
+                entropy -= p * Math.log2(p);
+            }
+
+            const entropyBits = entropy * length;
+            document.getElementById('entropy-value').textContent = 
+                entropyBits.toFixed(2);
+
+            let rating = "Rất yếu";
+            if (entropyBits > 50) rating = "Rất mạnh";
+            else if (entropyBits > 30) rating = "Mạnh";
+            else if (entropyBits > 20) rating = "Trung bình";
+            else if (entropyBits > 10) rating = "Yếu";
+
+            document.getElementById('entropy-rating').textContent = rating;
+        }
+
+        // Mark lesson complete when quiz passed
+        const originalCheck = QuizSystem.checkAnswers.bind(QuizSystem);
+        QuizSystem.checkAnswers = function() {
+            const score = originalCheck();
+            if (score >= 70) {
+                LessonCore.markLessonComplete(2, score);
+            }
+        };
+    </script>
+    
+    <style>
+        .example-box {
+            background: var(--border-dark);
+            padding: 1rem;
+            border-radius: 0.3rem;
+            margin: 1rem 0;
+            border-left: 4px solid var(--accent);
+        }
+
+        .security-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .security-table th,
+        .security-table td {
+            padding: 0.8rem;
+            border: 1px solid var(--border);
+            text-align: left;
+        }
+
+        .security-table th {
+            background: var(--accent);
+            color: var(--text-inv);
+        }
+
+        .security-table tr:nth-child(even) {
+            background: var(--border-dark);
+        }
+
+        .demo-result {
+            padding: 1rem;
+            background: var(--border-dark);
+            border-radius: 0.3rem;
+            margin-top: 1rem;
+        }
+    </style>
+</body>
+</html>
+

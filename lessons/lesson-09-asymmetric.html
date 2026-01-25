@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bài 9: Asymmetric Public-Key Cryptography</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/fontello.css">
+    <link rel="stylesheet" href="../css/design-system.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/lesson-styles.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <script src="https://cdn.jsdelivr.net/npm/tweetnacl-util@0.15.0/nacl-util.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tweetnacl@1.0.3/nacl.js"></script>
+</head>
+<body class="lesson scheme-asymmetric" data-lesson="9" onload="setup( ASYMMETRIC );">
+    <nav class="lesson-nav">
+        <a href="../index.html">← Về trang chủ</a>
+        <div class="lesson-progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+    </nav>
+
+    <header class="lesson-header">
+        <h1>Bài 9: Asymmetric Public-Key Cryptography <a target="_blank" href="https://en.wikipedia.org/wiki/Public-key_cryptography"><i class="icon-link-ext"></i></a></h1>
+        <p class="lesson-meta">
+            <span>⏱️ Thời gian: ~35 phút</span>
+            <span>⭐ Độ khó: Khó</span>
+            <span>📚 Module 4: Mã hóa Hiện đại</span>
+        </p>
+    </header>
+
+    <main class="lesson-content">
+        <section class="theory">
+            <h2>📖 Lý thuyết</h2>
+            
+            <h3>Mã hóa bất đối xứng là gì?</h3>
+            <p>
+                <strong>Asymmetric Cryptography</strong> (còn gọi là Public-Key Cryptography) sử dụng 
+                một cặp khóa toán học liên quan: <strong>Public Key</strong> (khóa công khai) và 
+                <strong>Private Key</strong> (khóa riêng tư).
+            </p>
+
+            <h3>Key Pair</h3>
+            <ul>
+                <li><strong>Public Key:</strong> Có thể chia sẻ công khai, dùng để mã hóa</li>
+                <li><strong>Private Key:</strong> Phải giữ bí mật, dùng để giải mã</li>
+                <li>Hai khóa được tạo ra cùng lúc và có quan hệ toán học với nhau</li>
+            </ul>
+
+            <h3>Giải quyết Key Distribution Problem</h3>
+            <p>
+                Mã hóa bất đối xứng giải quyết vấn đề phân phối khóa bằng cách:
+            </p>
+            <ol>
+                <li>Alice tạo key pair và gửi Public Key cho Bob (có thể công khai)</li>
+                <li>Bob dùng Public Key của Alice để mã hóa thông điệp</li>
+                <li>Chỉ Alice (có Private Key) mới có thể giải mã</li>
+                <li>Eve có thể đánh cắp Public Key nhưng không thể giải mã</li>
+            </ol>
+
+            <h3>Các thuật toán phổ biến</h3>
+            <ul>
+                <li><strong>RSA:</strong> Dựa trên độ khó của phân tích số nguyên tố</li>
+                <li><strong>ECC (Elliptic Curve Cryptography):</strong> Hiệu quả hơn RSA</li>
+                <li><strong>Diffie-Hellman:</strong> Key exchange protocol</li>
+            </ul>
+
+            <h3>So sánh với Symmetric</h3>
+            <table class="security-table">
+                <thead>
+                    <tr>
+                        <th>Symmetric</th>
+                        <th>Asymmetric</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Nhanh hơn</td>
+                        <td>Chậm hơn</td>
+                    </tr>
+                    <tr>
+                        <td>Key nhỏ hơn</td>
+                        <td>Key lớn hơn</td>
+                    </tr>
+                    <tr>
+                        <td>Vấn đề phân phối khóa</td>
+                        <td>Giải quyết phân phối khóa</td>
+                    </tr>
+                    <tr>
+                        <td>Dùng cho mã hóa dữ liệu</td>
+                        <td>Dùng cho key exchange, signatures</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="interactive-demo">
+            <h2>🎮 Thử nghiệm</h2>
+            <p>Demo mã hóa bất đối xứng - Public Key có thể công khai:</p>
+            
+            <!-- Use existing asymmetric.html demo -->
+            <section id="user-A" class="user">
+                <h2>Sender (Alice)</h2>
+
+                <div class="group privatekey">
+                    <h3 class="key alt">Private Key</h3>
+                    <textarea id="key-A-private" class="key-stream alt" placeholder=" " disabled></textarea>
+
+                    <div class="actions">
+                        <button id="key-gen-A">Generate</button>
+                    </div>
+                </div>
+
+                <div class="group">
+                    <h3 class="key alt">Public Key</h3>
+                    <textarea id="key-A-public" class="key-value alt" placeholder=" " disabled></textarea>
+
+                    <div class="actions">
+                        <button id="key-send-AtoB">Send</button>
+                    </div>
+                </div>
+
+                <div class="group">
+                    <h3 class="key">Bob's Public Key</h3>
+                    <textarea id="key-A" class="key-value" placeholder=" " disabled></textarea>
+                </div>
+
+                <div class="group">
+                    <h3>Plaintext for Bob</h3>
+                    <textarea id="plaintext-text-A" class="plaintext-text"></textarea>
+
+                    <div class="actions">
+                        <button id="plaintext-encrypt">Encrypt</button>
+                    </div>
+                </div>
+
+                <div class="group">
+                    <h3 class="cypher">Cyphertext for Bob</h3>
+                    <textarea id="cyphertext-text-A" class="cyphertext-text" placeholder=" " disabled></textarea>
+
+                    <div class="actions">
+                        <button id="cyphertext-send">Send</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="transmission">
+                <div id="transmit-atob">
+                    <i class="icon-right"></i>
+                    <i class="icon-down"></i>
+                </div>
+                <div id="transmit-btoa">
+                    <i class="icon-left"></i>
+                    <i class="icon-up"></i>
+                </div>
+            </section>
+
+            <section id="user-B" class="user">
+                <h2>Recipient (Bob)</h2>
+
+                <div class="group privatekey">
+                    <h3 class="key">Private Key</h3>
+                    <textarea id="key-B-private" class="key-stream" placeholder=" " disabled></textarea>
+
+                    <div class="actions">
+                        <button id="key-gen-B">Generate</button>
+                    </div>
+                </div>
+
+                <div class="group">
+                    <h3 class="key">Public Key</h3>
+                    <textarea id="key-B-public" class="key-value" placeholder=" " disabled></textarea>
+
+                    <div class="actions">
+                        <button id="key-send-BtoA">Send</button>
+                    </div>
+                </div>
+
+                <div class="group">
+                    <h3 class="key alt">Alice's Public Key</h3>
+                    <textarea id="key-B" class="key-value alt" placeholder=" " disabled></textarea>
+                </div>
+
+                <div class="group">
+                    <h3 class="cypher">Cyphertext from Alice</h3>
+                    <textarea id="cyphertext-text-B" class="cyphertext-text" placeholder=" " disabled></textarea>
+
+                    <div class="actions">
+                        <button id="cyphertext-decrypt-B">Decrypt</button>
+                    </div>
+                </div>
+
+                <div class="group">
+                    <h3>Plaintext from Alice</h3>
+                    <textarea id="plaintext-text-B" class="plaintext-text" placeholder=" " disabled></textarea>
+                </div>
+            </section>
+
+            <section id="user-E" class="user">
+                <h2>Eavesdropper (Eve)</h2>
+
+                <div class="group">
+                    <h3 class="key alt">Alice's Public Key</h3>
+                    <textarea id="key-EA" class="key-value alt" placeholder=" " disabled></textarea>
+                </div>
+
+                <div class="group">
+                    <h3 class="key">Bob's Public Key</h3>
+                    <textarea id="key-EB" class="key-value" placeholder=" " disabled></textarea>
+                </div>
+
+                <div class="group">
+                    <h3 class="cypher">Cyphertext from Alice</h3>
+                    <textarea id="cyphertext-text-E" class="cyphertext-text" placeholder=" " disabled></textarea>
+
+                    <div class="actions">
+                        <button id="cyphertext-decrypt-E">Decrypt</button>
+                    </div>
+                </div>
+
+                <div id="plaintext-E" class="group">
+                    <h3>Plaintext from Alice</h3>
+                    <textarea id="plaintext-text-E" class="plaintext-text" placeholder=" " disabled></textarea>
+                </div>
+            </section>
+        </section>
+
+        <section class="quiz">
+            <h2>📝 Kiểm tra kiến thức</h2>
+            <div class="quiz-questions"></div>
+            <button class="quiz-submit">Nộp bài</button>
+            <div class="quiz-score"></div>
+        </section>
+    </main>
+
+    <footer class="lesson-footer">
+        <button class="btn-prev" onclick="window.location.href='lesson-08-symmetric.html'">← Bài trước</button>
+        <button class="btn-next" onclick="window.location.href='lesson-10-hash-signatures.html'">Bài tiếp theo →</button>
+    </footer>
+
+    <script src="../js/crypt-util.js"></script>
+    <script src="../js/crypt-modern.js"></script>
+    <script src="../js/lesson-core.js"></script>
+    <script>
+        LessonCore.currentLesson = 9;
+        LessonCore.updateLessonProgressBar();
+        QuizSystem.init(9);
+
+        const originalCheck = QuizSystem.checkAnswers.bind(QuizSystem);
+        QuizSystem.checkAnswers = function() {
+            const score = originalCheck();
+            if (score >= 70) {
+                LessonCore.markLessonComplete(9, score);
+            }
+        };
+    </script>
+</body>
+</html>
+

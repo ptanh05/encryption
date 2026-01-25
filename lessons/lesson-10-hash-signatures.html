@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bài 10: Hash Functions & Digital Signatures</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/fontello.css">
+    <link rel="stylesheet" href="../css/design-system.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/lesson-styles.css">
+    <link rel="stylesheet" href="../css/animations.css">
+</head>
+<body class="lesson" data-lesson="10">
+    <nav class="lesson-nav">
+        <a href="../index.html">← Về trang chủ</a>
+        <div class="lesson-progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+    </nav>
+
+    <header class="lesson-header">
+        <h1>Bài 10: Hash Functions & Digital Signatures</h1>
+        <p class="lesson-meta">
+            <span>⏱️ Thời gian: ~30 phút</span>
+            <span>⭐ Độ khó: Trung bình</span>
+            <span>📚 Module 4: Mã hóa Hiện đại</span>
+        </p>
+    </header>
+
+    <main class="lesson-content">
+        <section class="theory">
+            <h2>📖 Lý thuyết</h2>
+            
+            <h3>Hash Functions (Hàm băm)</h3>
+            <p>
+                <strong>Hash Function</strong> là hàm một chiều chuyển đổi dữ liệu có độ dài bất kỳ 
+                thành một chuỗi có độ dài cố định (hash value).
+            </p>
+
+            <h4>Tính chất của Hash Function tốt:</h4>
+            <ul>
+                <li><strong>Deterministic:</strong> Cùng input → cùng output</li>
+                <li><strong>Fast computation:</strong> Tính toán nhanh</li>
+                <li><strong>Pre-image resistance:</strong> Khó tìm input từ output</li>
+                <li><strong>Collision resistance:</strong> Khó tìm 2 input có cùng hash</li>
+            </ul>
+
+            <h3>Các thuật toán Hash phổ biến</h3>
+            <ul>
+                <li><strong>MD5:</strong> 128-bit, đã bị phá (không an toàn)</li>
+                <li><strong>SHA-1:</strong> 160-bit, đã bị phá (không an toàn)</li>
+                <li><strong>SHA-256:</strong> 256-bit, an toàn (dùng trong Bitcoin)</li>
+                <li><strong>SHA-512:</strong> 512-bit, an toàn</li>
+            </ul>
+
+            <h3>Ứng dụng của Hash</h3>
+            <ul>
+                <li><strong>Password storage:</strong> Lưu hash thay vì password gốc</li>
+                <li><strong>Data integrity:</strong> Kiểm tra file có bị thay đổi không</li>
+                <li><strong>Digital signatures:</strong> Tạo chữ ký số</li>
+                <li><strong>Blockchain:</strong> Tạo block hash</li>
+            </ul>
+
+            <h3>Digital Signatures (Chữ ký số)</h3>
+            <p>
+                <strong>Digital Signature</strong> là phương pháp xác thực danh tính và đảm bảo tính 
+                toàn vẹn của thông điệp, tương tự như chữ ký tay nhưng bằng phương pháp số.
+            </p>
+
+            <h4>Quy trình tạo chữ ký:</h4>
+            <ol>
+                <li>Tạo hash của thông điệp</li>
+                <li>Mã hóa hash bằng Private Key (signing)</li>
+                <li>Gửi thông điệp + chữ ký</li>
+            </ol>
+
+            <h4>Quy trình xác thực:</h4>
+            <ol>
+                <li>Nhận thông điệp + chữ ký</li>
+                <li>Giải mã chữ ký bằng Public Key → hash1</li>
+                <li>Tính hash của thông điệp → hash2</li>
+                <li>So sánh hash1 và hash2</li>
+            </ol>
+        </section>
+
+        <section class="interactive-demo">
+            <h2>🎮 Thử nghiệm</h2>
+            
+            <h3>Hash Calculator</h3>
+            <div class="demo-container">
+                <div class="demo-group">
+                    <label>Nhập văn bản để tính hash:</label>
+                    <textarea id="hash-input" rows="3" placeholder="Nhập văn bản..."></textarea>
+                </div>
+                <button class="demo-btn" onclick="calculateHash()">Tính Hash (SHA-256)</button>
+                <div id="hash-result" style="margin-top: 1rem; padding: 1rem; background: var(--border-dark); border-radius: 0.3rem;">
+                    <strong>Hash:</strong> <span id="hash-output" style="font-family: monospace; word-break: break-all;"></span>
+                </div>
+            </div>
+
+            <h3>Hash Collision Demo</h3>
+            <div class="demo-container">
+                <p>Thử tìm 2 văn bản khác nhau có cùng hash (rất khó!):</p>
+                <div class="demo-group">
+                    <label>Văn bản 1:</label>
+                    <input type="text" id="collision-input1" placeholder="Text 1...">
+                </div>
+                <div class="demo-group">
+                    <label>Văn bản 2:</label>
+                    <input type="text" id="collision-input2" placeholder="Text 2...">
+                </div>
+                <button class="demo-btn" onclick="checkCollision()">Kiểm tra Collision</button>
+                <div id="collision-result" style="margin-top: 1rem;"></div>
+            </div>
+
+            <h3>Digital Signature Demo</h3>
+            <div class="demo-container">
+                <div class="demo-group">
+                    <label>Thông điệp:</label>
+                    <textarea id="sign-message" rows="2" placeholder="Nhập thông điệp..."></textarea>
+                </div>
+                <button class="demo-btn" onclick="createSignature()">Tạo chữ ký</button>
+                <div id="signature-result" style="margin-top: 1rem;">
+                    <p><strong>Chữ ký:</strong> <span id="signature-output" style="font-family: monospace; word-break: break-all;"></span></p>
+                    <button class="demo-btn" onclick="verifySignature()">Xác thực chữ ký</button>
+                    <p id="verification-result" style="margin-top: 0.5rem;"></p>
+                </div>
+            </div>
+        </section>
+
+        <section class="quiz">
+            <h2>📝 Kiểm tra kiến thức</h2>
+            <div class="quiz-questions"></div>
+            <button class="quiz-submit">Nộp bài</button>
+            <div class="quiz-score"></div>
+        </section>
+    </main>
+
+    <footer class="lesson-footer">
+        <button class="btn-prev" onclick="window.location.href='lesson-09-asymmetric.html'">← Bài trước</button>
+        <button class="btn-next" onclick="window.location.href='lesson-11-applications.html'">Bài tiếp theo →</button>
+    </footer>
+
+    <script src="../js/crypt-util.js"></script>
+    <script src="../js/lesson-core.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/crypto-js.js"></script>
+    <script>
+        LessonCore.currentLesson = 10;
+        LessonCore.updateLessonProgressBar();
+        QuizSystem.init(10);
+
+        let storedSignature = null;
+        let storedMessage = null;
+
+        function calculateHash() {
+            const input = document.getElementById('hash-input').value;
+            if (!input) return;
+
+            // Simple hash simulation (in real app, use Web Crypto API or library)
+            const hash = CryptoJS.SHA256(input).toString();
+            document.getElementById('hash-output').textContent = hash;
+        }
+
+        function checkCollision() {
+            const text1 = document.getElementById('collision-input1').value;
+            const text2 = document.getElementById('collision-input2').value;
+
+            if (!text1 || !text2) {
+                document.getElementById('collision-result').innerHTML = 
+                    '<p style="color: red;">Vui lòng nhập cả 2 văn bản!</p>';
+                return;
+            }
+
+            const hash1 = CryptoJS.SHA256(text1).toString();
+            const hash2 = CryptoJS.SHA256(text2).toString();
+
+            const result = document.getElementById('collision-result');
+            if (hash1 === hash2) {
+                result.innerHTML = `<p style="color: green;">🎉 Tìm thấy collision! Hash: ${hash1}</p>`;
+            } else {
+                result.innerHTML = `
+                    <p>Hash 1: <code>${hash1}</code></p>
+                    <p>Hash 2: <code>${hash2}</code></p>
+                    <p style="color: orange;">Không phải collision. Hãy thử lại!</p>
+                `;
+            }
+        }
+
+        function createSignature() {
+            const message = document.getElementById('sign-message').value;
+            if (!message) return;
+
+            // Simulate signing: hash the message
+            const signature = CryptoJS.SHA256(message + 'SECRET_KEY').toString();
+            storedSignature = signature;
+            storedMessage = message;
+
+            document.getElementById('signature-output').textContent = signature;
+            document.getElementById('verification-result').innerHTML = '';
+        }
+
+        function verifySignature() {
+            const message = document.getElementById('sign-message').value;
+            if (!message || !storedSignature) {
+                document.getElementById('verification-result').innerHTML = 
+                    '<p style="color: red;">Chưa có chữ ký hoặc thông điệp!</p>';
+                return;
+            }
+
+            const expectedSignature = CryptoJS.SHA256(message + 'SECRET_KEY').toString();
+            const isValid = expectedSignature === storedSignature && message === storedMessage;
+
+            const result = document.getElementById('verification-result');
+            if (isValid) {
+                result.innerHTML = '<p style="color: green;">✓ Chữ ký hợp lệ! Thông điệp chưa bị thay đổi.</p>';
+            } else {
+                result.innerHTML = '<p style="color: red;">✗ Chữ ký không hợp lệ! Thông điệp có thể đã bị thay đổi.</p>';
+            }
+        }
+
+        const originalCheck = QuizSystem.checkAnswers.bind(QuizSystem);
+        QuizSystem.checkAnswers = function() {
+            const score = originalCheck();
+            if (score >= 70) {
+                LessonCore.markLessonComplete(10, score);
+            }
+        };
+    </script>
+</body>
+</html>
+

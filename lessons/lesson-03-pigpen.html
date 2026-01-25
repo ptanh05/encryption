@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bài 3: Pigpen Cipher</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/fontello.css">
+    <link rel="stylesheet" href="../css/design-system.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/lesson-styles.css">
+    <link rel="stylesheet" href="../css/animations.css">
+</head>
+<body class="lesson scheme-pigpen" data-lesson="3" onload="setup( PIGPEN );">
+    <nav class="lesson-nav">
+        <a href="../index.html">← Về trang chủ</a>
+        <div class="lesson-progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+    </nav>
+
+    <header class="lesson-header">
+        <h1>Bài 3: Pigpen Cipher <a target="_blank" href="https://en.wikipedia.org/wiki/Pigpen_cipher"><i class="icon-link-ext"></i></a></h1>
+        <p class="lesson-meta">
+            <span>⏱️ Thời gian: ~15 phút</span>
+            <span>⭐ Độ khó: Dễ</span>
+            <span>📚 Module 2: Mã hóa Cổ điển</span>
+        </p>
+    </header>
+
+    <main class="lesson-content">
+        <section class="theory">
+            <h2>📖 Lý thuyết</h2>
+            
+            <h3>Lịch sử</h3>
+            <p>
+                <strong>Pigpen Cipher</strong> (còn gọi là Masonic Cipher, Freemason's Cipher) là một 
+                phương pháp mã hóa hình học đơn giản được sử dụng bởi Freemasons trong hơn 200 năm. 
+                Các biến thể của nó có thể bắt nguồn từ thế kỷ 11 hoặc sớm hơn.
+            </p>
+
+            <h3>Cách hoạt động</h3>
+            <p>
+                Pigpen Cipher thay thế mỗi chữ cái bằng một ký hiệu hình học dựa trên vị trí của chữ cái 
+                trong một lưới. Hệ thống sử dụng các hình vuông, hình chữ nhật và dấu chấm để tạo ra 
+                các ký hiệu duy nhất cho mỗi chữ cái.
+            </p>
+
+            <div class="example-box">
+                <strong>Cấu trúc:</strong>
+                <ul>
+                    <li>Chữ cái A-I: Nằm trong các hình vuông</li>
+                    <li>Chữ cái J-R: Nằm trong các hình chữ nhật</li>
+                    <li>Chữ cái S-Z: Nằm trong các hình X</li>
+                    <li>Dấu chấm được thêm vào để phân biệt các nhóm</li>
+                </ul>
+            </div>
+
+            <h3>Ưu và nhược điểm</h3>
+            <table class="security-table">
+                <thead>
+                    <tr>
+                        <th>Ưu điểm</th>
+                        <th>Nhược điểm</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Dễ học và sử dụng</td>
+                        <td>Rất dễ bị phá bằng frequency analysis</td>
+                    </tr>
+                    <tr>
+                        <td>Không cần khóa</td>
+                        <td>Key space rất nhỏ (chỉ 1 cách mã hóa)</td>
+                    </tr>
+                    <tr>
+                        <td>Trực quan, dễ nhớ</td>
+                        <td>Không an toàn cho mục đích bảo mật</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="interactive-demo">
+            <h2>🎮 Thử nghiệm</h2>
+            
+            <div id="inputs">
+                <div id="plaintext" class="group">
+                    <h3>Plain Text</h3>
+                    <input type="text" id="plaintext-text" class="plaintext-text">
+                </div>
+
+                <div id="options" class="group">
+                    <h3 class="key">Key <span class="sub-heading">(Bảng tra cứu Pigpen)</span></h3>
+                    <img src="../images/pigpen.svg" alt="Pigpen cypher symbols">
+                </div>
+
+                <div id="cyphertext" class="group">
+                    <h3 class="cypher">Cypher Text</h3>
+                    <input type="text" id="cyphertext-text" class="cyphertext-text">
+                </div>
+            </div>
+
+            <section id="encryption">
+                <h2>Encryption System</h2>
+
+                <div id="crypt-plaintext" class="group block">
+                    <h3>Plain Letter</h3>
+                    <div id="plaintext-chars" class="grid"></div>
+                </div>
+
+                <div id="crypt-mapping" class="group block">
+                    <h3 id="mapping-direction">Encrypts To</h3>
+                    <div id="mapping" class="grid"></div>
+                </div>
+
+                <div id="crypt-cyphertext" class="group block">
+                    <h3 class="cypher">Cypher Symbol</h3>
+                    <div id="cyphertext-chars" class="grid"></div>
+                </div>
+            </section>
+
+            <section id="charts">
+                <h2>Frequency Analysis</h2>
+
+                <div id="plaintext-freq" class="group">
+                    <h3>Plain Text Letter Frequency</h3>
+                    <div id="plaintext-chart" class="chart"></div>
+                </div>
+
+                <div id="cyphertext-freq" class="group">
+                    <h3 class="cypher">Cypher Text Symbol Frequency</h3>
+                    <div id="cyphertext-chart" class="chart"></div>
+                </div>
+            </section>
+        </section>
+
+        <section class="quiz">
+            <h2>📝 Kiểm tra kiến thức</h2>
+            <div class="quiz-questions"></div>
+            <button class="quiz-submit">Nộp bài</button>
+            <div class="quiz-score"></div>
+        </section>
+
+        <section class="challenge">
+            <h2>🎯 Thử thách</h2>
+            <p>Hoàn thành các thử thách sau:</p>
+            <div class="challenges-list"></div>
+        </section>
+    </main>
+
+    <footer class="lesson-footer">
+        <button class="btn-prev" onclick="window.location.href='lesson-02-fundamentals.html'">← Bài trước</button>
+        <button class="btn-next" onclick="window.location.href='lesson-04-caesar.html'">Bài tiếp theo →</button>
+    </footer>
+
+    <script src="../js/crypt-util.js"></script>
+    <script src="../js/crypt-simple.js"></script>
+    <script src="../js/lesson-core.js"></script>
+    <script>
+        LessonCore.currentLesson = 3;
+        LessonCore.updateLessonProgressBar();
+        QuizSystem.init(3);
+        ChallengeSystem.init(3);
+
+        const originalCheck = QuizSystem.checkAnswers.bind(QuizSystem);
+        QuizSystem.checkAnswers = function() {
+            const score = originalCheck();
+            if (score >= 70) {
+                LessonCore.markLessonComplete(3, score);
+            }
+        };
+    </script>
+</body>
+</html>
+

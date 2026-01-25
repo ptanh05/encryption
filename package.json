@@ -1,0 +1,24 @@
+{
+  "name": "cryptography-learning-platform",
+  "version": "1.0.0",
+  "description": "Interactive educational website for learning cryptography",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server -p 8080 -o",
+    "dev": "npx live-server --port=8080 --open=/index.html",
+    "serve": "python -m http.server 8080",
+    "serve-php": "php -S localhost:8080"
+  },
+  "keywords": [
+    "cryptography",
+    "education",
+    "learning",
+    "encryption",
+    "crypto"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {}
+}
+

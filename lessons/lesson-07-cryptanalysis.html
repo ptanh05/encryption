@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bài 7: Cryptanalysis Techniques</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/fontello.css">
+    <link rel="stylesheet" href="../css/design-system.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/lesson-styles.css">
+    <link rel="stylesheet" href="../css/animations.css">
+</head>
+<body class="lesson" data-lesson="7">
+    <nav class="lesson-nav">
+        <a href="../index.html">← Về trang chủ</a>
+        <div class="lesson-progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+    </nav>
+
+    <header class="lesson-header">
+        <h1>Bài 7: Cryptanalysis Techniques</h1>
+        <p class="lesson-meta">
+            <span>⏱️ Thời gian: ~35 phút</span>
+            <span>⭐ Độ khó: Khó</span>
+            <span>📚 Module 3: Phân tích và Tấn công</span>
+        </p>
+    </header>
+
+    <main class="lesson-content">
+        <section class="theory">
+            <h2>📖 Lý thuyết</h2>
+            
+            <h3>Các loại tấn công</h3>
+            
+            <h4>1. Ciphertext-Only Attack</h4>
+            <p>
+                Kẻ tấn công chỉ có ciphertext, không có plaintext hay key. Đây là tình huống khó nhất.
+            </p>
+            <div class="example-box">
+                <strong>Kỹ thuật:</strong> Frequency analysis, pattern recognition, brute force
+            </div>
+
+            <h4>2. Known Plaintext Attack</h4>
+            <p>
+                Kẻ tấn công có cả plaintext và ciphertext tương ứng. Mục tiêu là tìm key.
+            </p>
+            <div class="example-box">
+                <strong>Ví dụ:</strong> Biết "HELLO" → "KHOOR", có thể suy ra shift = 3
+            </div>
+
+            <h4>3. Chosen Plaintext Attack</h4>
+            <p>
+                Kẻ tấn công có thể chọn plaintext và nhận ciphertext tương ứng.
+            </p>
+
+            <h4>4. Side-Channel Attack</h4>
+            <p>
+                Tấn công dựa trên thông tin phụ như thời gian thực thi, tiêu thụ năng lượng, 
+                hoặc bức xạ điện từ.
+            </p>
+
+            <h3>Kasiski Examination</h3>
+            <p>
+                Kỹ thuật tìm độ dài key của Vigenère Cipher bằng cách:
+            </p>
+            <ol>
+                <li>Tìm các chuỗi lặp lại trong ciphertext</li>
+                <li>Tính khoảng cách giữa các chuỗi lặp</li>
+                <li>Tìm ước chung lớn nhất (GCD) của các khoảng cách</li>
+                <li>GCD có thể là độ dài key</li>
+            </ol>
+
+            <h3>Brute Force Attack</h3>
+            <p>
+                Thử tất cả các khả năng key cho đến khi tìm ra plaintext có nghĩa.
+            </p>
+            <div class="example-box">
+                <strong>Caesar Cipher:</strong> 26 khả năng (khả thi)
+                <br><strong>AES-256:</strong> 2^256 khả năng (không khả thi với công nghệ hiện tại)
+            </div>
+        </section>
+
+        <section class="interactive-demo">
+            <h2>🎮 Thử nghiệm</h2>
+            
+            <h3>Known Plaintext Attack Simulator</h3>
+            <div class="demo-container">
+                <div class="demo-group">
+                    <label>Known Plaintext:</label>
+                    <input type="text" id="known-plaintext" placeholder="HELLO">
+                </div>
+                <div class="demo-group">
+                    <label>Known Ciphertext:</label>
+                    <input type="text" id="known-ciphertext" placeholder="KHOOR">
+                </div>
+                <button class="demo-btn" onclick="findKey()">Tìm Key</button>
+                <div id="key-result" style="margin-top: 1rem;"></div>
+            </div>
+
+            <h3>Kasiski Examination</h3>
+            <div class="demo-container">
+                <div class="demo-group">
+                    <label>Ciphertext (Vigenère):</label>
+                    <textarea id="kasiski-input" rows="3" 
+                              placeholder="Nhập ciphertext..."></textarea>
+                </div>
+                <button class="demo-btn" onclick="kasiskiExamination()">Phân tích</button>
+                <div id="kasiski-results" style="margin-top: 1rem;"></div>
+            </div>
+        </section>
+
+        <section class="quiz">
+            <h2>📝 Kiểm tra kiến thức</h2>
+            <div class="quiz-questions"></div>
+            <button class="quiz-submit">Nộp bài</button>
+            <div class="quiz-score"></div>
+        </section>
+    </main>
+
+    <footer class="lesson-footer">
+        <button class="btn-prev" onclick="window.location.href='lesson-06-frequency-analysis.html'">← Bài trước</button>
+        <button class="btn-next" onclick="window.location.href='lesson-08-symmetric.html'">Bài tiếp theo →</button>
+    </footer>
+
+    <script src="../js/crypt-util.js"></script>
+    <script src="../js/lesson-core.js"></script>
+    <script>
+        LessonCore.currentLesson = 7;
+        LessonCore.updateLessonProgressBar();
+        QuizSystem.init(7);
+
+        function findKey() {
+            const plaintext = document.getElementById('known-plaintext').value.toUpperCase();
+            const ciphertext = document.getElementById('known-ciphertext').value.toUpperCase();
+            
+            if (plaintext.length !== ciphertext.length) {
+                document.getElementById('key-result').innerHTML = 
+                    '<p style="color: red;">Plaintext và Ciphertext phải có cùng độ dài!</p>';
+                return;
+            }
+
+            // Find shift for Caesar
+            let shifts = [];
+            for (let i = 0; i < plaintext.length; i++) {
+                if (plaintext[i] >= 'A' && plaintext[i] <= 'Z' && 
+                    ciphertext[i] >= 'A' && ciphertext[i] <= 'Z') {
+                    const shift = (ciphertext.charCodeAt(i) - plaintext.charCodeAt(i) + 26) % 26;
+                    shifts.push(shift);
+                }
+            }
+
+            if (shifts.length > 0) {
+                const mostCommonShift = shifts.sort((a,b) =>
+                    shifts.filter(v => v===a).length - shifts.filter(v => v===b).length
+                ).pop();
+                
+                document.getElementById('key-result').innerHTML = 
+                    `<strong>Key (Caesar Shift):</strong> ${mostCommonShift}`;
+            }
+        }
+
+        function kasiskiExamination() {
+            const ciphertext = document.getElementById('kasiski-input').value.toUpperCase();
+            if (!ciphertext) return;
+
+            // Find repeating patterns
+            const patterns = {};
+            for (let len = 3; len <= 5; len++) {
+                for (let i = 0; i <= ciphertext.length - len; i++) {
+                    const pattern = ciphertext.substr(i, len);
+                    if (!patterns[pattern]) {
+                        patterns[pattern] = [];
+                    }
+                    patterns[pattern].push(i);
+                }
+            }
+
+            // Find patterns that appear multiple times
+            const repeating = {};
+            for (let pattern in patterns) {
+                if (patterns[pattern].length > 1) {
+                    repeating[pattern] = patterns[pattern];
+                }
+            }
+
+            let result = '<h4>Chuỗi lặp lại:</h4><ul>';
+            const distances = [];
+            
+            for (let pattern in repeating) {
+                const positions = repeating[pattern];
+                result += `<li><strong>${pattern}</strong>: Vị trí ${positions.join(', ')}</li>`;
+                
+                for (let i = 1; i < positions.length; i++) {
+                    distances.push(positions[i] - positions[0]);
+                }
+            }
+            result += '</ul>';
+
+            if (distances.length > 0) {
+                // Find GCD
+                const gcd = distances.reduce((a, b) => {
+                    while (b) {
+                        const t = b;
+                        b = a % b;
+                        a = t;
+                    }
+                    return a;
+                });
+
+                result += `<h4>Khoảng cách:</h4><p>${distances.join(', ')}</p>`;
+                result += `<h4>Ước chung lớn nhất:</h4><p><strong>${gcd}</strong> (có thể là độ dài key)</p>`;
+            }
+
+            document.getElementById('kasiski-results').innerHTML = result;
+        }
+
+        const originalCheck = QuizSystem.checkAnswers.bind(QuizSystem);
+        QuizSystem.checkAnswers = function() {
+            const score = originalCheck();
+            if (score >= 70) {
+                LessonCore.markLessonComplete(7, score);
+            }
+        };
+    </script>
+</body>
+</html>
+
