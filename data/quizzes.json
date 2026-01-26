@@ -59,6 +59,30 @@
       "correctAnswer": true
     }
   ],
+  "3": [
+    {
+      "type": "multiple-choice",
+      "question": "Pigpen Cipher được sử dụng bởi ai?",
+      "options": [
+        "Julius Caesar",
+        "Freemasons",
+        "Người Ai Cập",
+        "Alan Turing"
+      ],
+      "correctAnswer": 1
+    },
+    {
+      "type": "true-false",
+      "question": "Pigpen Cipher sử dụng các ký hiệu hình học để mã hóa.",
+      "correctAnswer": true
+    },
+    {
+      "type": "multiple-choice",
+      "question": "Pigpen Cipher có bao nhiêu ký hiệu cho mỗi chữ cái?",
+      "options": ["1", "2", "3", "4"],
+      "correctAnswer": 0
+    }
+  ],
   "5": [
     {
       "type": "multiple-choice",
@@ -70,6 +94,155 @@
       "type": "true-false",
       "question": "Vigenère Cipher an toàn hơn Caesar Cipher.",
       "correctAnswer": true
+    }
+  ],
+  "6": [
+    {
+      "type": "multiple-choice",
+      "question": "Frequency Analysis dựa trên điều gì?",
+      "options": [
+        "Tần suất xuất hiện của các ký tự",
+        "Độ dài của thông điệp",
+        "Số lượng từ",
+        "Màu sắc của văn bản"
+      ],
+      "correctAnswer": 0
+    },
+    {
+      "type": "true-false",
+      "question": "Chữ 'E' là chữ cái phổ biến nhất trong tiếng Anh.",
+      "correctAnswer": true
+    },
+    {
+      "type": "multiple-choice",
+      "question": "Frequency Analysis hiệu quả nhất với loại cipher nào?",
+      "options": [
+        "Caesar Cipher",
+        "Vigenère Cipher",
+        "One-time pad",
+        "AES"
+      ],
+      "correctAnswer": 0
+    }
+  ],
+  "7": [
+    {
+      "type": "multiple-choice",
+      "question": "Cryptanalysis là gì?",
+      "options": [
+        "Khoa học nghiên cứu cách phá mã",
+        "Khoa học tạo ra mã hóa mới",
+        "Nghệ thuật viết mã",
+        "Công nghệ lưu trữ dữ liệu"
+      ],
+      "correctAnswer": 0
+    },
+    {
+      "type": "true-false",
+      "question": "Brute force attack là phương pháp thử tất cả các khóa có thể.",
+      "correctAnswer": true
+    },
+    {
+      "type": "multiple-choice",
+      "question": "Side-channel attack là gì?",
+      "options": [
+        "Tấn công dựa trên thông tin phụ (thời gian, năng lượng)",
+        "Tấn công từ bên cạnh",
+        "Tấn công mạng",
+        "Tấn công vật lý"
+      ],
+      "correctAnswer": 0
+    }
+  ],
+  "8": [
+    {
+      "type": "multiple-choice",
+      "question": "Symmetric encryption sử dụng bao nhiêu khóa?",
+      "options": ["1", "2", "3", "Nhiều"],
+      "correctAnswer": 0
+    },
+    {
+      "type": "true-false",
+      "question": "Vấn đề chính của symmetric encryption là phân phối khóa.",
+      "correctAnswer": true
+    },
+    {
+      "type": "multiple-choice",
+      "question": "AES là viết tắt của gì?",
+      "options": [
+        "Advanced Encryption Standard",
+        "Asymmetric Encryption System",
+        "Automatic Encryption Service",
+        "Applied Encryption Standard"
+      ],
+      "correctAnswer": 0
+    }
+  ],
+  "9": [
+    {
+      "type": "multiple-choice",
+      "question": "Asymmetric encryption sử dụng bao nhiêu khóa?",
+      "options": ["1", "2", "3", "Nhiều"],
+      "correctAnswer": 1
+    },
+    {
+      "type": "true-false",
+      "question": "Public key dùng để mã hóa, private key dùng để giải mã.",
+      "correctAnswer": true
+    },
+    {
+      "type": "multiple-choice",
+      "question": "RSA là viết tắt của gì?",
+      "options": [
+        "Rivest-Shamir-Adleman",
+        "Random Secure Algorithm",
+        "Rapid Security Application",
+        "Reliable Secure Access"
+      ],
+      "correctAnswer": 0
+    }
+  ],
+  "10": [
+    {
+      "type": "multiple-choice",
+      "question": "Hash function có tính chất gì?",
+      "options": [
+        "Một chiều (one-way)",
+        "Hai chiều",
+        "Có thể đảo ngược",
+        "Tuyến tính"
+      ],
+      "correctAnswer": 0
+    },
+    {
+      "type": "true-false",
+      "question": "Digital signature đảm bảo tính toàn vẹn và xác thực.",
+      "correctAnswer": true
+    },
+    {
+      "type": "multiple-choice",
+      "question": "SHA-256 tạo ra hash có độ dài bao nhiêu bit?",
+      "options": ["128", "256", "512", "1024"],
+      "correctAnswer": 1
+    }
+  ],
+  "11": [
+    {
+      "type": "multiple-choice",
+      "question": "HTTPS sử dụng giao thức nào?",
+      "options": ["HTTP", "TLS/SSL", "FTP", "SMTP"],
+      "correctAnswer": 1
+    },
+    {
+      "type": "true-false",
+      "question": "Blockchain sử dụng cryptography để đảm bảo tính bất biến.",
+      "correctAnswer": true
+    },
+    {
+      "type": "multiple-choice",
+      "question": "Bitcoin sử dụng thuật toán hash nào?",
+      "options": ["SHA-256", "MD5", "AES", "RSA"],
+      "correctAnswer": 0
     }
   ]
 }

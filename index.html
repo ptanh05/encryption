@@ -3,7 +3,37 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>🔐 Học Mật mã học từ đầu - Cryptography Learning</title>
+    
+    <!-- Primary Meta Tags -->
+    <title>🔐 Học Mật mã học từ đầu - Cryptography Learning Platform</title>
+    <meta name="title" content="🔐 Học Mật mã học từ đầu - Cryptography Learning Platform">
+    <meta name="description" content="Khóa học tương tác về mật mã học với 11 bài học từ cơ bản đến nâng cao. Học về Caesar Cipher, Vigenère, RSA, AES, Blockchain và nhiều hơn nữa.">
+    <meta name="keywords" content="cryptography, mật mã học, encryption, decryption, caesar cipher, vigenère, RSA, AES, blockchain, học lập trình, security">
+    <meta name="author" content="Cryptography Learning Platform">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="Vietnamese">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://your-project.vercel.app/">
+    <meta property="og:title" content="🔐 Học Mật mã học từ đầu - Cryptography Learning Platform">
+    <meta property="og:description" content="Khóa học tương tác về mật mã học với 11 bài học từ cơ bản đến nâng cao.">
+    <meta property="og:image" content="https://your-project.vercel.app/images/cryptography.svg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://your-project.vercel.app/">
+    <meta property="twitter:title" content="🔐 Học Mật mã học từ đầu - Cryptography Learning Platform">
+    <meta property="twitter:description" content="Khóa học tương tác về mật mã học với 11 bài học từ cơ bản đến nâng cao.">
+    <meta property="twitter:image" content="https://your-project.vercel.app/images/cryptography.svg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔐</text></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔐</text></svg>">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#00d4aa">
+    
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/fontello.css">
     <link rel="stylesheet" href="css/design-system.css">
@@ -44,6 +74,12 @@
     <header id="mainheader">
         <h1 class="glow-text">🔐 Học Mật mã học từ đầu</h1>
         <p class="sub-heading">Khóa học tương tác về Cryptography - 11 bài học từ cơ bản đến nâng cao</p>
+        
+        <!-- Search Bar -->
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="🔍 Tìm kiếm bài học...">
+            <div id="searchResults" class="search-results"></div>
+        </div>
     </header>
 
     <main>
@@ -261,6 +297,9 @@
     </main>
 
     <script src="js/lesson-core.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/progress-manager.js"></script>
+    <script src="js/certificate.js"></script>
     <script>
         // Initialize progress tracking on home page
         LessonCore.init();
@@ -318,6 +357,11 @@
             createParticles();
             addRippleEffect();
             animateCards();
+            
+            // Initialize UI enhancements (theme toggle, etc.)
+            if (typeof UIEnhancements !== 'undefined') {
+                UIEnhancements.init();
+            }
         });
     </script>
     

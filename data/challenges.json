@@ -29,12 +29,98 @@
       "hint": "Sử dụng Vigenère table với key stream LEMONLEMONLE"
     }
   ],
+  "1": [
+    {
+      "title": "Hiểu về Plaintext và Ciphertext",
+      "description": "Mã hóa thông điệp 'CRYPTOGRAPHY' thành ciphertext bằng cách dịch mỗi chữ cái lên 3 vị trí (A->D, B->E, ...)",
+      "answer": "FUBSWRJUDSKB",
+      "hint": "Sử dụng Caesar Cipher với shift = 3"
+    }
+  ],
+  "2": [
+    {
+      "title": "Phân biệt Substitution và Transposition",
+      "description": "Cho plaintext 'HELLO', tạo ciphertext bằng cách đảo ngược thứ tự: 'OLLEH'. Đây là loại cipher gì?",
+      "answer": "TRANSPOSITION",
+      "hint": "Transposition cipher thay đổi vị trí, không thay đổi ký tự"
+    }
+  ],
   "6": [
     {
       "title": "Frequency Analysis",
       "description": "Phân tích và giải mã ciphertext có tần suất chữ E cao nhất",
       "answer": "THEQUICKBROWNFOX",
       "hint": "E là chữ cái phổ biến nhất trong tiếng Anh"
+    }
+  ],
+  "7": [
+    {
+      "title": "Brute Force Attack",
+      "description": "Với Caesar Cipher, cần thử tối đa bao nhiêu lần để phá mã?",
+      "answer": "25",
+      "hint": "Caesar Cipher có 26 ký tự, nhưng shift = 0 không thay đổi gì"
+    },
+    {
+      "title": "Known Plaintext Attack",
+      "description": "Nếu biết plaintext 'HELLO' tương ứng với ciphertext 'KHOOR', shift key là bao nhiêu?",
+      "answer": "3",
+      "hint": "H -> K là dịch 3 vị trí"
+    }
+  ],
+  "8": [
+    {
+      "title": "Key Distribution Problem",
+      "description": "Trong symmetric encryption, nếu có 10 người cần giao tiếp an toàn, cần bao nhiêu khóa?",
+      "answer": "45",
+      "hint": "Công thức: n*(n-1)/2 với n là số người"
+    },
+    {
+      "title": "AES Key Size",
+      "description": "AES-256 sử dụng khóa có độ dài bao nhiêu bit?",
+      "answer": "256",
+      "hint": "Số trong tên AES-256 là độ dài khóa"
+    }
+  ],
+  "9": [
+    {
+      "title": "Public Key Encryption",
+      "description": "Nếu Alice muốn gửi thông điệp bí mật cho Bob, cô ấy sẽ dùng khóa nào của Bob để mã hóa?",
+      "answer": "PUBLIC",
+      "hint": "Public key dùng để mã hóa, private key dùng để giải mã"
+    },
+    {
+      "title": "RSA Key Pair",
+      "description": "RSA tạo ra cặp khóa dựa trên tính chất toán học nào?",
+      "answer": "PRIME",
+      "hint": "Dựa trên tính khó của việc phân tích thừa số nguyên tố lớn"
+    }
+  ],
+  "10": [
+    {
+      "title": "Hash Collision",
+      "description": "Tính chất quan trọng của hash function là gì? (Một từ)",
+      "answer": "DETERMINISTIC",
+      "hint": "Cùng input luôn cho cùng output"
+    },
+    {
+      "title": "Digital Signature",
+      "description": "Để tạo digital signature, dùng khóa nào?",
+      "answer": "PRIVATE",
+      "hint": "Private key dùng để ký, public key dùng để verify"
+    }
+  ],
+  "11": [
+    {
+      "title": "HTTPS Protocol",
+      "description": "HTTPS bảo vệ dữ liệu bằng cách nào? (Một từ)",
+      "answer": "ENCRYPTION",
+      "hint": "Mã hóa dữ liệu trong quá trình truyền"
+    },
+    {
+      "title": "Blockchain Hash",
+      "description": "Mỗi block trong blockchain chứa hash của block nào?",
+      "answer": "PREVIOUS",
+      "hint": "Hash của block trước đó để tạo chuỗi"
     }
   ]
 }

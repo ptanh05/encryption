@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>404 - Trang không tìm thấy</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/fontello.css">
+    <link rel="stylesheet" href="css/design-system.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/lesson-styles.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <style>
+        .error-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .error-code {
+            font-size: clamp(6rem, 15vw, 10rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .error-message {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        .error-description {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            max-width: 600px;
+        }
+        
+        .error-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .btn-home {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--accent), var(--primary-dark));
+            color: white;
+            text-decoration: none;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            transition: all var(--transition-base);
+            box-shadow: 0 4px 15px rgba(0, 212, 170, 0.3);
+        }
+        
+        .btn-home:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 212, 170, 0.4);
+        }
+        
+        .btn-back {
+            padding: 1rem 2rem;
+            background: var(--bg-card);
+            color: var(--text-primary);
+            text-decoration: none;
+            border: 1px solid var(--border-primary);
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            transition: all var(--transition-base);
+        }
+        
+        .btn-back:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--border-secondary);
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="error-code">404</div>
+        <h1 class="error-message">Trang không tìm thấy</h1>
+        <p class="error-description">
+            Xin lỗi, trang bạn đang tìm kiếm không tồn tại hoặc đã bị di chuyển.
+        </p>
+        <div class="error-actions">
+            <a href="index.html" class="btn-home">🏠 Về trang chủ</a>
+            <a href="javascript:history.back()" class="btn-back">← Quay lại</a>
+        </div>
+    </div>
+    
+    <script>
+        // Auto redirect after 10 seconds
+        setTimeout(() => {
+            if (confirm('Tự động chuyển về trang chủ sau 10 giây. Bạn có muốn chuyển ngay bây giờ không?')) {
+                window.location.href = 'index.html';
+            }
+        }, 10000);
+    </script>
+</body>
+</html>
+

@@ -223,16 +223,30 @@ const QuizSystem = {
     },
     
     loadQuestions(lessonId) {
-        // Questions will be loaded from data or defined in lesson file
+        const container = document.querySelector('.quiz-questions');
+        if (container) {
+            container.innerHTML = '<div class="loading-state">⏳ Đang tải câu hỏi...</div>';
+        }
+        
         fetch(`../data/quizzes.json`)
-            .then(res => res.json())
+            .then(res => {
+                if (!res.ok) throw new Error('Failed to load quizzes');
+                return res.json();
+            })
             .then(data => {
                 this.currentQuiz = data[lessonId] || [];
-                this.renderQuiz();
+                if (this.currentQuiz.length === 0 && container) {
+                    container.innerHTML = '<div class="empty-state">📝 Chưa có câu hỏi cho bài học này.</div>';
+                } else {
+                    this.renderQuiz();
+                }
             })
-            .catch(() => {
-                // Fallback if file doesn't exist
+            .catch((error) => {
+                console.error('Error loading quiz:', error);
                 this.currentQuiz = [];
+                if (container) {
+                    container.innerHTML = '<div class="error-state">❌ Không thể tải câu hỏi. Vui lòng thử lại sau.</div>';
+                }
             });
     },
     
@@ -364,14 +378,30 @@ const ChallengeSystem = {
     },
     
     loadChallenges(lessonId) {
+        const container = document.querySelector('.challenges-list');
+        if (container) {
+            container.innerHTML = '<div class="loading-state">⏳ Đang tải thử thách...</div>';
+        }
+        
         fetch(`../data/challenges.json`)
-            .then(res => res.json())
+            .then(res => {
+                if (!res.ok) throw new Error('Failed to load challenges');
+                return res.json();
+            })
             .then(data => {
                 this.currentChallenges = data[lessonId] || [];
-                this.renderChallenges();
+                if (this.currentChallenges.length === 0 && container) {
+                    container.innerHTML = '<div class="empty-state">🎯 Chưa có thử thách cho bài học này.</div>';
+                } else {
+                    this.renderChallenges();
+                }
             })
-            .catch(() => {
+            .catch((error) => {
+                console.error('Error loading challenges:', error);
                 this.currentChallenges = [];
+                if (container) {
+                    container.innerHTML = '<div class="error-state">❌ Không thể tải thử thách. Vui lòng thử lại sau.</div>';
+                }
             });
     },
     
@@ -464,15 +494,22 @@ const UIEnhancements = {
     },
     
     setupThemeToggle() {
+        // Check saved theme preference
+        const savedTheme = localStorage.getItem('crypto-theme') || 'dark';
+        if (savedTheme === 'light') {
+            document.body.classList.add('light-theme');
+        }
+        
         const themeToggle = document.createElement('button');
         themeToggle.className = 'theme-toggle';
-        themeToggle.innerHTML = '🌙';
+        themeToggle.innerHTML = document.body.classList.contains('light-theme') ? '☀️' : '🌙';
+        themeToggle.setAttribute('aria-label', 'Toggle theme');
         themeToggle.setAttribute('data-tooltip', 'Switch theme');
         themeToggle.style.cssText = `
             position: fixed;
             top: 1rem;
             right: 1rem;
-            background: var(--accent);
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
             border: none;
             border-radius: 50%;
             width: 50px;
@@ -482,11 +519,15 @@ const UIEnhancements = {
             z-index: 1000;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(0, 212, 170, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         `;
 
         themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('light-theme');
-            themeToggle.innerHTML = document.body.classList.contains('light-theme') ? '☀️' : '🌙';
+            const isLight = document.body.classList.toggle('light-theme');
+            themeToggle.innerHTML = isLight ? '☀️' : '🌙';
+            localStorage.setItem('crypto-theme', isLight ? 'light' : 'dark');
         });
 
         document.body.appendChild(themeToggle);
