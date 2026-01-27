@@ -369,7 +369,7 @@
 
 .quiz-submit, .demo-btn {
     background: linear-gradient(135deg, var(--accent), var(--key-back));
-    border: none;
+    border: 1px solid rgba(255, 255, 255, 0.55);
     border-radius: 2rem;
     padding: 1rem 2rem;
     color: white;
@@ -381,6 +381,7 @@
     overflow: hidden;
     margin-top: 1rem;
     font-size: 1rem;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.15), 0 6px 18px rgba(41, 182, 246, 0.18);
 }
 
 .quiz-submit::before, .demo-btn::before {
@@ -401,6 +402,13 @@
 .quiz-submit:hover, .demo-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 10px 25px rgba(41, 182, 246, 0.4);
+}
+
+/* Light theme: keep a visible (but softer) outline */
+body.light-theme .quiz-submit,
+body.light-theme .demo-btn {
+    border-color: rgba(0, 0, 0, 0.18);
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.6), 0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
 .quiz-submit:active, .demo-btn:active {

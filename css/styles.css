@@ -343,7 +343,7 @@ body.home main {
 
 /* Auth button in navbar */
 .auth-btn {
-    margin-left: var(--spacing-lg);
+    margin-left: -20px;
     padding: 0.4rem 1rem;
     border-radius: var(--radius-full);
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -582,7 +582,7 @@ body.menu-open {
 .theme-toggle--navbar {
     width: 40px;
     height: 40px;
-    margin-left: var(--spacing-md);
+    margin-left: -30px;
     flex-shrink: 0;
 }
 
