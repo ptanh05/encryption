@@ -46,7 +46,7 @@
 
     --secret: #B71C1C;  
     --active: #FFEB3B;  
-    --border-active: #F57F17;
+    --border-active: #F57F17; 
     
     /* Enhanced gradients */
     --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -192,14 +192,26 @@ body.home main {
     
     header {
         padding: var(--spacing-lg) var(--spacing-md);
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
     }
     
     header h1 {
         font-size: clamp(1.5rem, 6vw, 2rem);
+        flex: none;
     }
     
     header .sub-heading {
         font-size: clamp(0.85rem, 3vw, 0.95rem);
+        flex: none;
+        max-width: 100%;
+    }
+    
+    .search-container {
+        width: 100%;
+        max-width: 100%;
+        margin-top: var(--spacing-md);
     }
     
     main {
@@ -335,14 +347,27 @@ body.home main {
     padding: 0;
     gap: var(--spacing-md);
     align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none; /* Firefox */
+}
+
+.navbar-menu::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
 }
 
 .navbar-menu li {
     margin: 0;
+    flex: 0 0 auto;
 }
 
 .nav-link {
-    display: block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     padding: var(--spacing-xs) var(--spacing-md);
     color: var(--text-secondary);
     text-decoration: none;
@@ -352,6 +377,7 @@ body.home main {
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    white-space: nowrap;
 }
 
 .nav-link::before {
@@ -398,31 +424,41 @@ body.home main {
         top: 70px;
         left: 0;
         width: 100%;
-        height: calc(100vh - 70px);
+        padding: var(--spacing-sm) var(--spacing-md);
+        margin: 0;
         background: linear-gradient(135deg, rgba(10, 14, 39, 0.98), rgba(20, 27, 45, 0.98));
         backdrop-filter: blur(20px);
-        flex-direction: column;
-        align-items: flex-start;
-        padding: var(--spacing-xl) var(--spacing-lg);
-        gap: var(--spacing-sm);
-        transform: translateX(-100%);
-        transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        box-shadow: 2px 0 20px rgba(0, 0, 0, 0.3);
-        overflow-y: auto;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        align-items: center;
+        gap: var(--spacing-xs);
+        transform: translateY(-100%);
+        transition: transform 0.3s ease;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        overflow-x: auto;
+        overflow-y: hidden;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none;  /* IE/Edge */
+    }
+
+    .navbar-menu::-webkit-scrollbar {
+        display: none; /* Chrome/Safari */
     }
     
     .navbar-menu.active {
-        transform: translateX(0);
+        transform: translateY(0);
     }
     
     .navbar-menu li {
-        width: 100%;
+        flex: 0 0 auto;
         opacity: 0;
-        animation: slideInRight 0.5s ease forwards;
+        animation: slideInRight 0.4s ease forwards;
     }
     
     .navbar-menu.active li {
-        animation-delay: calc(var(--i, 0) * 0.1s);
+        animation-delay: calc(var(--i, 0) * 0.05s);
     }
     
     .navbar-menu li:nth-child(1) { --i: 0; }
@@ -434,32 +470,24 @@ body.home main {
     .navbar-menu li:nth-child(7) { --i: 6; }
     
     .nav-link {
-        width: 100%;
-        padding: var(--spacing-md) var(--spacing-lg);
-        font-size: 1.1rem;
-        border-left: 3px solid transparent;
-        border-radius: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: auto;
+        padding: var(--spacing-xs) var(--spacing-md);
+        font-size: 0.95rem;
+        border-left: none;
+        border-radius: var(--radius-full);
+        white-space: nowrap;
     }
     
     .nav-link:hover,
     .nav-link.active {
-        border-left-color: var(--accent);
         background: rgba(0, 212, 170, 0.15);
-        padding-left: calc(var(--spacing-lg) + 5px);
+        padding-left: var(--spacing-md);
     }
     
-    /* Overlay when menu is open */
-    .navbar-menu.active::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: -1;
-        animation: fadeIn 0.3s ease;
-    }
+    /* Không cần overlay toàn màn hình nữa vì menu dạng thanh ngang */
 }
 
 /* Prevent body scroll when menu is open on mobile */
@@ -507,27 +535,28 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: var(--spacing-md);
     text-align: center;
     padding: var(--spacing-xl) var(--spacing-md);
     margin-bottom: var(--spacing-lg);
     position: relative;
+    flex-wrap: wrap;
 }
 
 header::after {
     content: '';
     position: absolute;
     bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100px;
+    left: 0;
+    width: 100%;
     height: 4px;
     background: linear-gradient(90deg, transparent, var(--accent), transparent);
     border-radius: var(--radius-full);
 }
 
 header h1 {
-    font-size: clamp(2rem, 5vw, 3rem);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
     margin: 0;
     background: linear-gradient(135deg, var(--accent), var(--secondary));
     -webkit-background-clip: text;
@@ -538,7 +567,7 @@ header h1 {
 }
 
 header .sub-heading {
-    font-size: clamp(0.95rem, 2vw, 1.1rem);
+    font-size: clamp(0.85rem, 1.5vw, 1rem);
     color: var(--text-secondary);
     max-width: 700px;
     margin: 0 auto;
@@ -1038,9 +1067,10 @@ body:is(.scheme-symmetric, .scheme-asymmetric) .chart label {
     }
 
     body.home {
-        flex-direction: row;
+        flex-direction: column !important;
         gap: 2rem;
         align-items: center;
+        max-width: 1200px;
     }
 
     body:not(:is(.home, .scheme-symmetric, .scheme-asymmetric)) {
@@ -1058,8 +1088,23 @@ body:is(.scheme-symmetric, .scheme-asymmetric) .chart label {
         flex-direction: column;
     }
 
-    body.home header { width: 20%; }
-    body.home main   { width: 15%; }
+    /* Removed old sidebar layout CSS - not needed for new home page design */
+    body.home header { 
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    body.home main { 
+        width: 100% !important;
+        max-width: 1000px !important;
+    }
+    
+    body.home {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        max-width: 1200px !important;
+    }
     
     body.home main img {
         width: 100%;

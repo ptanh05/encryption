@@ -492,9 +492,11 @@
 /* Search Styles */
 .search-container {
     position: relative;
-    max-width: 600px;
+    max-width: 300px;
     width: 100%;
-    margin: var(--spacing-lg) auto 0;
+    margin: 0;
+    flex: 0 0 auto;
+    min-width: 200px;
 }
 
 /* Search Responsive Enhancements */
@@ -996,6 +998,7 @@
 
 .lesson-card a {
     display: flex;
+    flex-direction: column;
     align-items: center;
     gap: var(--spacing-md);
     padding: var(--spacing-lg) var(--spacing-xl);
@@ -1013,6 +1016,8 @@
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
+    width: 100%;
+    text-align: center;
 }
 
 .lesson-number {
@@ -1085,6 +1090,7 @@
     border: 1px solid rgba(0, 212, 170, 0.2);
     color: var(--accent);
     box-shadow: 0 2px 8px rgba(0, 212, 170, 0.1);
+    align-self: center;
 }
 
 .lesson-checkmark {
@@ -1101,6 +1107,7 @@
     box-shadow: 0 4px 20px rgba(81, 207, 102, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
     animation: pulse 2s infinite;
     border: 2px solid rgba(255, 255, 255, 0.1);
+    align-self: center;
 }
 
 @keyframes pulse {
@@ -1351,18 +1358,17 @@
     
     .lesson-card a {
         flex-direction: column;
-        align-items: flex-start;
-        text-align: left;
+        align-items: center;
+        text-align: center;
     }
     
-    .lesson-number {
-        align-self: flex-start;
+    .lesson-content-wrapper {
+        text-align: center;
     }
     
     .lesson-progress,
     .lesson-checkmark {
-        align-self: flex-end;
-        margin-top: var(--spacing-xs);
+        align-self: center;
     }
 }
 
@@ -1375,7 +1381,14 @@
     }
     
     .lesson-card a {
+        flex-direction: column;
+        align-items: center;
         padding: 2rem 2.5rem;
+    }
+    
+    .lesson-progress,
+    .lesson-checkmark {
+        align-self: center;
     }
 }
 

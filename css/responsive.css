@@ -132,19 +132,19 @@
     /* Lesson Cards */
     .lesson-card a {
         flex-direction: column;
+        align-items: center;
         text-align: center;
         padding: var(--spacing-md);
         gap: var(--spacing-sm);
     }
     
-    .lesson-number {
-        margin: 0 auto;
+    .lesson-content-wrapper {
+        text-align: center;
     }
     
     .lesson-progress,
     .lesson-checkmark {
-        position: static;
-        margin-top: var(--spacing-xs);
+        align-self: center;
     }
     
     /* Header */
@@ -227,8 +227,18 @@
     }
     
     .lesson-card a {
-        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
         gap: var(--spacing-sm);
+    }
+    
+    .lesson-content-wrapper {
+        text-align: center;
+    }
+    
+    .lesson-progress,
+    .lesson-checkmark {
+        align-self: center;
     }
     
     .progress-actions {
@@ -267,7 +277,18 @@
     }
     
     .lesson-card a {
+        flex-direction: column;
+        align-items: center;
         padding: var(--spacing-md) var(--spacing-lg);
+    }
+    
+    .lesson-content-wrapper {
+        text-align: center;
+    }
+    
+    .lesson-progress,
+    .lesson-checkmark {
+        align-self: center;
     }
     
     .certificate-content {
@@ -296,6 +317,20 @@
         max-width: 600px;
     }
     
+    .lesson-card a {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .lesson-content-wrapper {
+        text-align: center;
+    }
+    
+    .lesson-progress,
+    .lesson-checkmark {
+        align-self: center;
+    }
+    
     .lesson-card:hover {
         transform: translateY(-4px);
     }
@@ -317,6 +352,20 @@
     
     .certificate-content {
         max-width: 800px;
+    }
+    
+    .lesson-card a {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .lesson-content-wrapper {
+        text-align: center;
+    }
+    
+    .lesson-progress,
+    .lesson-checkmark {
+        align-self: center;
     }
 }
 
