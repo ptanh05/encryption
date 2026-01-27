@@ -93,24 +93,20 @@
     }
 }
 
-/* Glowing text effect */
+/* Subtle hero title highlight (replaces heavy glow) */
 .glow-text {
-    text-shadow: 0 0 10px currentColor,
-                 0 0 20px currentColor,
-                 0 0 30px currentColor;
-    animation: glow-pulse 2s ease-in-out infinite alternate;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+    animation: hero-fade-in 0.8s ease-out both;
 }
 
-@keyframes glow-pulse {
+@keyframes hero-fade-in {
     from {
-        text-shadow: 0 0 10px currentColor,
-                     0 0 20px currentColor,
-                     0 0 30px currentColor;
+        opacity: 0;
+        transform: translateY(8px);
     }
     to {
-        text-shadow: 0 0 20px currentColor,
-                     0 0 30px currentColor,
-                     0 0 40px currentColor;
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
