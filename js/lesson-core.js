@@ -6,6 +6,21 @@ const LessonCore = {
     progress: {},
     currentLesson: null,
     
+    // Mapping từ số bài học sang tên file
+    lessonFiles: {
+        1: 'lesson-01-introduction.html',
+        2: 'lesson-02-fundamentals.html',
+        3: 'lesson-03-pigpen.html',
+        4: 'lesson-04-caesar.html',
+        5: 'lesson-05-vigenere.html',
+        6: 'lesson-06-frequency-analysis.html',
+        7: 'lesson-07-cryptanalysis.html',
+        8: 'lesson-08-symmetric.html',
+        9: 'lesson-09-asymmetric.html',
+        10: 'lesson-10-hash-signatures.html',
+        11: 'lesson-11-applications.html'
+    },
+    
     init() {
         this.loadProgress();
         this.updateNavigation();
@@ -180,16 +195,16 @@ const LessonCore = {
     goToNextLesson() {
         if (!this.currentLesson) return;
         const nextLesson = this.currentLesson + 1;
-        if (nextLesson <= 11) {
-            window.location.href = `lesson-${String(nextLesson).padStart(2, '0')}-*.html`;
+        if (nextLesson <= 11 && this.lessonFiles[nextLesson]) {
+            window.location.href = this.lessonFiles[nextLesson];
         }
     },
     
     goToPrevLesson() {
         if (!this.currentLesson) return;
         const prevLesson = this.currentLesson - 1;
-        if (prevLesson >= 1) {
-            window.location.href = `lesson-${String(prevLesson).padStart(2, '0')}-*.html`;
+        if (prevLesson >= 1 && this.lessonFiles[prevLesson]) {
+            window.location.href = this.lessonFiles[prevLesson];
         }
     },
     
@@ -494,10 +509,15 @@ const UIEnhancements = {
     },
     
     setupThemeToggle() {
+        // Xóa tất cả nút theme toggle cũ (nếu có) để tránh trùng lặp
+        const existingToggles = document.querySelectorAll('.theme-toggle');
+        existingToggles.forEach(toggle => toggle.remove());
+
         // Check saved theme preference
         const savedTheme = localStorage.getItem('crypto-theme') || 'dark';
         if (savedTheme === 'light') {
             document.body.classList.add('light-theme');
+            document.documentElement.classList.add('light-theme');
         }
         
         const themeToggle = document.createElement('button');
@@ -505,32 +525,30 @@ const UIEnhancements = {
         themeToggle.innerHTML = document.body.classList.contains('light-theme') ? '☀️' : '🌙';
         themeToggle.setAttribute('aria-label', 'Toggle theme');
         themeToggle.setAttribute('data-tooltip', 'Switch theme');
-        themeToggle.style.cssText = `
-            position: fixed;
-            top: 1rem;
-            right: 1rem;
-            background: linear-gradient(135deg, var(--accent), var(--secondary));
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 1.5rem;
-            cursor: pointer;
-            z-index: 1000;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 212, 170, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        `;
+
+        // Trang bài học: nút nổi góc phải trên
+        if (document.body.classList.contains('lesson')) {
+            themeToggle.classList.add('theme-toggle--floating');
+            document.body.appendChild(themeToggle);
+        } else {
+            // Trang chủ: đặt nút sau nút đăng nhập/đăng ký trong navbar
+            const authButton = document.getElementById('authButton');
+            if (authButton && authButton.parentNode) {
+                themeToggle.classList.add('theme-toggle--navbar');
+                authButton.insertAdjacentElement('afterend', themeToggle);
+            } else {
+                // Fallback: nút nổi nếu không tìm thấy navbar
+                themeToggle.classList.add('theme-toggle--floating');
+                document.body.appendChild(themeToggle);
+            }
+        }
 
         themeToggle.addEventListener('click', () => {
             const isLight = document.body.classList.toggle('light-theme');
+            document.documentElement.classList.toggle('light-theme', isLight);
             themeToggle.innerHTML = isLight ? '☀️' : '🌙';
             localStorage.setItem('crypto-theme', isLight ? 'light' : 'dark');
         });
-
-        document.body.appendChild(themeToggle);
     },
     
     setupSmoothScrolling() {
@@ -615,7 +633,7 @@ const UIEnhancements = {
     }
 };
 
-// Light theme CSS - apply to entire page when body has `.light-theme`
+// Light theme CSS - apply to entire page when html/body has `.light-theme`
 const lightThemeCSS = `
 /* Override design tokens when light theme is active */
 body.light-theme {
@@ -636,6 +654,7 @@ body.light-theme {
 }
 
 /* Global page background */
+html.light-theme,
 body.light-theme {
     background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 50%, #f8f9fa 100%);
     color: var(--text);

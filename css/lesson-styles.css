@@ -188,6 +188,120 @@
     color: var(--text);
 }
 
+/* Shared content helpers: timelines, glossary, example boxes, etc. */
+.timeline {
+    margin: 1.5rem 0;
+    padding-left: 2rem;
+    border-left: 3px solid var(--accent);
+    position: relative;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: -6px;
+    top: 0;
+    bottom: 0;
+    width: 9px;
+    background: radial-gradient(circle at center, var(--accent) 0, transparent 70%);
+    opacity: 0.3;
+}
+
+.timeline-item {
+    margin-bottom: 1rem;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.glossary {
+    margin: 1.5rem 0;
+}
+
+.glossary dt {
+    margin-top: 1rem;
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.glossary dd {
+    margin-left: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+}
+
+.example-box {
+    background: rgba(255, 255, 255, 0.04);
+    padding: 1rem 1.25rem;
+    border-radius: 0.75rem;
+    margin: 1rem 0;
+    border-left: 4px solid var(--accent);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-right: 1px solid rgba(255, 255, 255, 0.04);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.security-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 0.75rem;
+    overflow: hidden;
+}
+
+.security-table th,
+.security-table td {
+    padding: 0.85rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    text-align: left;
+    font-size: 0.95rem;
+}
+
+.security-table th {
+    background: linear-gradient(135deg, var(--accent), var(--secondary));
+    color: var(--text-inv);
+    font-weight: 600;
+}
+
+.security-table tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.demo-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.demo-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.demo-input,
+.interactive-demo input[type="text"],
+.interactive-demo select {
+    padding: 0.8rem 1rem;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-primary);
+}
+
+.interactive-demo .demo-result {
+    padding: 1rem 1.25rem;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
 /* Interactive Demo Section */
 .interactive-demo {
     background: var(--back-high);

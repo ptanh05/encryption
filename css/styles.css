@@ -73,10 +73,16 @@ body {
     gap: 2rem;
     min-height: 100vh;
     margin: 0;
-    padding: 2rem 0;
+    padding: 0;
     position: relative;
     width: 100%;
     background: linear-gradient(180deg, #0a0e27 0%, #141b2d 50%, #0a0e27 100%);
+}
+
+/* Ensure lesson pages in light mode always span full viewport width */
+body.lesson.light-theme {
+    width: 100%;
+    max-width: 100%;
 }
 
 /* Page shell full-width */
@@ -207,10 +213,9 @@ body.home main {
 
 @media (max-width: 768px) {
     body {
-        padding: var(--spacing-md) var(--spacing-sm);
+        padding: 0;
         gap: var(--spacing-lg);
     }
-    
     header {
         padding: var(--spacing-lg) var(--spacing-md);
         flex-direction: column;
@@ -265,9 +270,8 @@ body.home main {
 
 @media (max-width: 480px) {
     body {
-        padding: var(--spacing-sm);
+        padding: 0;
     }
-    
     header {
         padding: var(--spacing-md) var(--spacing-sm);
     }
@@ -558,6 +562,52 @@ body.menu-open {
         opacity: 1;
         transform: translateX(0);
     }
+}
+
+/*** THEME TOGGLE BUTTON ********************************************************/
+
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(135deg, var(--accent), var(--secondary));
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(0, 212, 170, 0.3);
+    transition: all 0.25s ease;
+}
+
+.theme-toggle--navbar {
+    width: 40px;
+    height: 40px;
+    margin-left: var(--spacing-md);
+    flex-shrink: 0;
+}
+
+.theme-toggle--floating {
+    position: fixed !important;
+    top: 1rem !important;
+    right: 1rem !important;
+    width: 48px;
+    height: 48px;
+    z-index: 10000 !important;
+    font-size: 1.5rem;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Theme toggle can be placed in navbar on home page */
+
+.theme-toggle:hover {
+    transform: translateY(-1px) scale(1.03);
+    box-shadow: 0 6px 18px rgba(0, 212, 170, 0.4);
+}
+
+.theme-toggle:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow: 0 3px 10px rgba(0, 212, 170, 0.25);
 }
 
 @keyframes fadeIn {
@@ -1383,19 +1433,11 @@ body:is(.scheme-symmetric, .scheme-asymmetric) .chart label {
         align-items: center;
     }
 
+    /* Keep a vertical flow for regular pages (including lesson pages) */
     body:not(:is(.home, .scheme-symmetric, .scheme-asymmetric)) {
-        flex-direction: row;
-        gap: 1rem;
-        align-items: flex-start;
-    }
-
-    nav {
-        flex-direction: row;
-        flex: 1;
-    }
-
-    nav ul {
         flex-direction: column;
+        gap: 2rem;
+        align-items: center;
     }
 
     /* Removed old sidebar layout CSS - not needed for new home page design */
