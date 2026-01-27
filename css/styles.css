@@ -71,13 +71,34 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 2rem;
-    max-width: 1200px;
     min-height: 100vh;
-    margin: 0 auto;
-    padding: 2rem 1rem;
+    margin: 0;
+    padding: 2rem 0;
     position: relative;
     width: 100%;
     background: linear-gradient(180deg, #0a0e27 0%, #141b2d 50%, #0a0e27 100%);
+}
+
+/* Page shell full-width */
+.page-shell {
+    width: 100%;
+    margin: 0 0 3rem 0;
+    padding: 0;
+}
+
+body.home main,
+body.home header,
+body.home #progress-overview,
+body.home #mainnav {
+    width: 100%;
+}
+
+body.home main {
+    margin: 0 auto 3rem;
+}
+
+body.home section {
+    margin: 0 auto 2.5rem;
 }
 
 body::before {
@@ -274,15 +295,25 @@ body.home main {
 .navbar-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 var(--spacing-md);
+    padding: 0 var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-lg);
+    height: 70px;
+}
+
+.navbar-main {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 70px;
+    gap: var(--spacing-xl);
+    flex: 1;
 }
 
 .navbar-brand {
     flex-shrink: 0;
+    margin-right: 0;
 }
 
 .navbar-brand a {
@@ -299,6 +330,36 @@ body.home main {
 
 .navbar-brand a:hover {
     transform: scale(1.05);
+}
+
+/* Primary CTA button in navbar (currently unused, reserved for future) */
+.nav-cta {
+    display: none;
+}
+
+/* Auth button in navbar */
+.auth-btn {
+    margin-left: var(--spacing-lg);
+    padding: 0.4rem 1rem;
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+}
+
+.auth-btn:hover {
+    background: rgba(0, 212, 170, 0.15);
+    border-color: rgba(0, 212, 170, 0.6);
+}
+
+.auth-btn-logged-in {
+    background: rgba(0, 212, 170, 0.15);
+    border-color: rgba(0, 212, 170, 0.8);
 }
 
 /* Hamburger Menu Button */
@@ -349,19 +410,11 @@ body.home main {
     align-items: center;
     flex-direction: row;
     flex-wrap: nowrap;
-    justify-content: flex-start;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scrollbar-width: none; /* Firefox */
-}
-
-.navbar-menu::-webkit-scrollbar {
-    display: none; /* Chrome/Safari */
+    justify-content: center;
 }
 
 .navbar-menu li {
     margin: 0;
-    flex: 0 0 auto;
 }
 
 .nav-link {
@@ -544,6 +597,29 @@ header {
     flex-wrap: wrap;
 }
 
+/* Hero two-column layout on larger screens */
+.hero-layout {
+    width: 100%;
+    max-width: 1100px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-xl);
+}
+
+.hero-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.hero-actions {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
 header::after {
     content: '';
     position: absolute;
@@ -572,6 +648,37 @@ header .sub-heading {
     max-width: 700px;
     margin: 0 auto;
     line-height: 1.6;
+}
+
+/* Search container as command palette */
+body.home .search-container {
+    width: 100%;
+    max-width: 480px;
+}
+
+@media (min-width: 900px) {
+    header {
+        text-align: left;
+        align-items: center;
+    }
+
+    .hero-layout {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .hero-text {
+        align-items: flex-start;
+        max-width: 520px;
+    }
+
+    .hero-actions {
+        justify-content: flex-end;
+    }
+
+    body.home .search-container {
+        max-width: 420px;
+    }
 }
 
 
@@ -1014,6 +1121,204 @@ body:is(.scheme-symmetric, .scheme-asymmetric) .chart label {
 }
 
 
+/*** AUTH MODAL ********************************************************/
+
+.auth-modal.hidden {
+    display: none;
+}
+
+.auth-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+}
+
+.auth-dialog {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 420px;
+    background: linear-gradient(135deg, rgba(10, 14, 39, 0.98), rgba(20, 27, 45, 0.98));
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+    padding: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.auth-close {
+    position: absolute;
+    top: 0.75rem;
+    right: 1rem;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+
+.auth-tabs {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+}
+
+.auth-tab {
+    flex: 1;
+    padding: 0.5rem 0.8rem;
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.auth-tab.active {
+    background: rgba(0, 212, 170, 0.18);
+    border-color: rgba(0, 212, 170, 0.8);
+    color: var(--text-primary);
+}
+
+.auth-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.auth-form.hidden,
+.auth-profile.hidden {
+    display: none;
+}
+
+.auth-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+}
+
+.auth-form input {
+    padding: 0.45rem 0.75rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+}
+
+.auth-password-field .auth-password-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.auth-password-wrapper input {
+    flex: 1;
+}
+
+.auth-toggle-password {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-secondary);
+    border-radius: var(--radius-full);
+    width: 2.1rem;
+    height: 2.1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.auth-toggle-password:hover {
+    background: rgba(0, 212, 170, 0.15);
+    color: var(--text-primary);
+}
+
+.auth-submit {
+    margin-top: 0.5rem;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius-md);
+    border: none;
+    background: linear-gradient(135deg, var(--accent), var(--secondary));
+    color: var(--text-inv);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 14px rgba(0, 212, 170, 0.3);
+}
+
+.auth-submit:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(0, 212, 170, 0.4);
+}
+
+.auth-hint {
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--text-low);
+}
+
+.auth-message {
+    margin-top: 0.4rem;
+    font-size: 0.8rem;
+}
+
+.auth-message.error {
+    color: #ff6b6b;
+}
+
+.auth-message.success {
+    color: #51cf66;
+}
+
+.auth-profile h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1rem;
+}
+
+.auth-profile p {
+    margin: 0 0 0.75rem 0;
+    font-size: 0.85rem;
+    color: var(--text-low);
+}
+
+.auth-profile .auth-logout {
+    padding: 0.4rem 0.9rem;
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.auth-profile .auth-logout:hover {
+    background: rgba(255, 107, 107, 0.1);
+    border-color: rgba(255, 107, 107, 0.7);
+    color: #ff6b6b;
+}
+
 
 /*** RESPONSIVE ********************************************************/
 
@@ -1063,14 +1368,13 @@ body:is(.scheme-symmetric, .scheme-asymmetric) .chart label {
 @media screen and (min-width: 90rem) {
     body {
         max-width: unset;
-        margin: 0 2rem;
+        margin: 0;
     }
 
     body.home {
         flex-direction: column !important;
         gap: 2rem;
         align-items: center;
-        max-width: 1200px;
     }
 
     body:not(:is(.home, .scheme-symmetric, .scheme-asymmetric)) {
@@ -1103,7 +1407,7 @@ body:is(.scheme-symmetric, .scheme-asymmetric) .chart label {
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
-        max-width: 1200px !important;
+        max-width: 100% !important;
     }
     
     body.home main img {

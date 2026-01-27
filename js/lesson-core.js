@@ -615,21 +615,127 @@ const UIEnhancements = {
     }
 };
 
-// Light theme CSS
+// Light theme CSS - apply to entire page when body has `.light-theme`
 const lightThemeCSS = `
-.light-theme {
-    --back: linear-gradient(135deg, #f8f9fa, #e9ecef);
-    --back-high: rgba(0, 0, 0, 0.05);
+/* Override design tokens when light theme is active */
+body.light-theme {
+    --back: #f8f9fa;
+    --back-high: rgba(0, 0, 0, 0.03);
     --text: #212529;
     --text-low: #6c757d;
+    --text-inv: #ffffff;
     --border: #dee2e6;
+    --border-dark: #ced4da;
     --accent: #007bff;
+    --accent-secondary: #ff6b6b;
+    --success: #28a745;
+    --warning: #ffc107;
+    --error: #dc3545;
+    --plain-bar: #74c0fc;
+    --cypher-bar: #f76707;
 }
 
-.light-theme body::before {
-    background: radial-gradient(circle at 20% 80%, rgba(0, 123, 255, 0.1), transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 193, 7, 0.1), transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(40, 167, 69, 0.1), transparent 50%);
+/* Global page background */
+body.light-theme {
+    background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 50%, #f8f9fa 100%);
+    color: var(--text);
+}
+
+body.light-theme::before {
+    background:
+        radial-gradient(circle at 20% 80%, rgba(0, 123, 255, 0.12), transparent 55%),
+        radial-gradient(circle at 80% 20%, rgba(255, 193, 7, 0.12), transparent 55%),
+        radial-gradient(circle at 40% 40%, rgba(40, 167, 69, 0.08), transparent 55%);
+}
+
+/* Navbar */
+body.light-theme .top-navbar {
+    background: linear-gradient(135deg, rgba(248, 249, 250, 0.95), rgba(233, 236, 239, 0.95));
+    border-bottom-color: rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+body.light-theme .navbar-brand a {
+    -webkit-text-fill-color: initial;
+    color: #0b7285;
+}
+
+body.light-theme .nav-link {
+    color: var(--text-low);
+}
+
+body.light-theme .nav-link:hover,
+body.light-theme .nav-link.active {
+    color: var(--text);
+    background: rgba(0, 123, 255, 0.08);
+}
+
+/* Sections / cards */
+body.light-theme section {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 249, 250, 0.98));
+    border-color: rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+body.light-theme section:hover {
+    border-color: rgba(0, 123, 255, 0.25);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+}
+
+body.light-theme .lesson-card {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(0, 0, 0, 0.06);
+}
+
+/* Inputs */
+body.light-theme input,
+body.light-theme textarea {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(0, 0, 0, 0.12);
+    color: var(--text);
+}
+
+body.light-theme input::placeholder,
+body.light-theme textarea::placeholder {
+    color: var(--text-low);
+}
+
+body.light-theme input:focus,
+body.light-theme textarea:focus {
+    background: #ffffff;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.18), 0 4px 12px rgba(0, 123, 255, 0.12);
+}
+
+/* Auth dialog */
+body.light-theme .auth-dialog {
+    background: linear-gradient(135deg, #ffffff, #f8f9fa);
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+body.light-theme .auth-backdrop {
+    background: rgba(0, 0, 0, 0.35);
+}
+
+/* Progress bar */
+body.light-theme .progress-bar {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .progress-fill {
+    background: linear-gradient(90deg, #007bff, #20c997);
+}
+
+/* Misc text colors */
+body.light-theme .sub-heading,
+body.light-theme .instruction {
+    color: var(--text-low);
+}
+
+body.light-theme h1,
+body.light-theme h2,
+body.light-theme h3 {
+    color: var(--text);
 }
 `;
 

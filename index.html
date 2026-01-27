@@ -45,45 +45,56 @@
 <body class="home page-enter">
     <div class="particles"></div>
     
-    <!-- Mobile Navigation Bar -->
-    <nav class="top-navbar" id="topNavbar">
-        <div class="navbar-container">
-            <div class="navbar-brand">
-                <a href="#mainheader">🔐 Cryptography</a>
-            </div>
-            
-            <!-- Hamburger Menu Button -->
-            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-            </button>
-            
-            <!-- Navigation Menu -->
-            <ul class="navbar-menu" id="navbarMenu">
-                <li><a href="#progress-overview" class="nav-link">Tiến độ</a></li>
-                <li><a href="#module-1" class="nav-link">Module 1</a></li>
-                <li><a href="#module-2" class="nav-link">Module 2</a></li>
-                <li><a href="#module-3" class="nav-link">Module 3</a></li>
-                <li><a href="#module-4" class="nav-link">Module 4</a></li>
-                <li><a href="#module-5" class="nav-link">Module 5</a></li>
-                <li><a href="#legacy-demos" class="nav-link">Demos</a></li>
-            </ul>
-        </div>
-    </nav>
-    
-    <header id="mainheader">
-        <h1 class="glow-text">🔐 Học Mật mã học từ đầu</h1>
-        <p class="sub-heading">Khóa học tương tác về Cryptography - 11 bài học từ cơ bản đến nâng cao</p>
-        
-        <!-- Search Bar -->
-        <div class="search-container">
-            <input type="text" id="searchInput" class="search-input" placeholder="🔍 Tìm kiếm bài học...">
-            <div id="searchResults" class="search-results"></div>
-        </div>
-    </header>
+    <div class="page-shell">
+        <!-- Mobile Navigation Bar -->
+        <nav class="top-navbar" id="topNavbar">
+            <div class="navbar-container">
+                <div class="navbar-main">
+                    <div class="navbar-brand">
+                        <a href="#mainheader">🔐 Cryptography</a>
+                    </div>
+                    
+                    <!-- Hamburger Menu Button -->
+                    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                    </button>
+                    
+                    <!-- Navigation Menu -->
+                    <ul class="navbar-menu" id="navbarMenu">
+                        <li><a href="#progress-overview" class="nav-link">Tiến độ</a></li>
+                        <li><a href="#module-1" class="nav-link">Module 1</a></li>
+                        <li><a href="#module-2" class="nav-link">Module 2</a></li>
+                        <li><a href="#module-3" class="nav-link">Module 3</a></li>
+                        <li><a href="#module-4" class="nav-link">Module 4</a></li>
+                        <li><a href="#module-5" class="nav-link">Module 5</a></li>
+                        <li><a href="#legacy-demos" class="nav-link">Demos</a></li>
+                    </ul>
 
-    <main>
+                    <button id="authButton" class="auth-btn">Đăng nhập</button>
+                </div>
+            </div>
+        </nav>
+        
+        <header id="mainheader">
+            <div class="hero-layout">
+                <div class="hero-text">
+                    <h1 class="glow-text">🔐 Học Mật mã học từ đầu</h1>
+                    <p class="sub-heading">Khóa học tương tác về Cryptography - 11 bài học từ cơ bản đến nâng cao</p>
+                </div>
+                
+                <!-- Search Bar -->
+                <div class="hero-actions">
+                    <div class="search-container">
+                        <input type="text" id="searchInput" class="search-input" placeholder="🔍 Tìm kiếm bài học...">
+                        <div id="searchResults" class="search-results"></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <main>
         <section id="progress-overview">
             <h2>📊 Tiến độ học tập</h2>
             <div class="progress-bar">
@@ -295,8 +306,10 @@
                 </ul>
             </section>
         </nav>
-    </main>
+        </main>
+    </div>
 
+    <script src="js/auth.js"></script>
     <script src="js/lesson-core.js"></script>
     <script src="js/search.js"></script>
     <script src="js/progress-manager.js"></script>
