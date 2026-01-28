@@ -16,18 +16,48 @@
     <script src="https://cdn.jsdelivr.net/npm/tweetnacl@1.0.3/nacl.js"></script>
 </head>
 
-<body onload="setup( SYMMETRIC );">
+<body class="scheme-symmetric" onload="setup( SYMMETRIC );">
 
-    <header id="mainheader">
-        <h1>Symmetric Key Cryptography <a target="_blank" href="https://en.wikipedia.org/wiki/Symmetric-key_algorithm"><i class="icon-link-ext"></i></a></h1>
-        <p class="sub-heading">A 'Symmetric' encryption scheme is one where the same secret key is used for both encryption and decryption.</p>
-        <p class="sub-heading">The need to share a key is the main weakness with this type of scheme, since the key can be intercepted by an eavesdropper. This is called the <em>'Key Distribution Problem'</em>.</p>
-        <p class="sub-heading">Modern symmetric encryption schemes use long, random keys and complex maths for the encryption. If the key is kept secure, they can be very hard to break.</p>
+    <header id="mainheader" class="symmetric-header">
+        <div class="symmetric-header__content">
+            <div class="symmetric-header__title">
+                <h1>Symmetric Key Cryptography
+                    <a target="_blank" href="https://en.wikipedia.org/wiki/Symmetric-key_algorithm">
+                        <i class="icon-link-ext"></i>
+                    </a>
+                </h1>
+                <p class="sub-heading">
+                    A "symmetric" encryption scheme uses the <strong>same secret key</strong> for both
+                    encryption and decryption.
+                </p>
+                <p class="sub-heading">
+                    The need to share that key safely is the main weakness of this approach &mdash;
+                    this is known as the <em>Key Distribution Problem</em>.
+                </p>
+                <p class="sub-heading">
+                    Modern schemes use long, random keys and heavy maths. When the key is protected,
+                    they are extremely hard to break.
+                </p>
+            </div>
+
+            <div class="symmetric-header__meta">
+                <div class="pill pill--live">Interactive demo</div>
+                <div class="pill pill--concept">Try sending a message and see what Eve can learn.</div>
+            </div>
+        </div>
     </header>
 
     <main>
-        <section id="user-A" class="user">
-            <h2>Sender (Alice)</h2>
+        <section id="user-A" class="user symmetric-card symmetric-card--alice">
+            <header class="symmetric-card__header">
+                <span class="step-badge">Step 1</span>
+                <div>
+                    <h2>Sender (Alice)</h2>
+                    <p class="symmetric-card__subtitle">
+                        Generate and share a secret key, then encrypt a message for Bob.
+                    </p>
+                </div>
+            </header>
 
             <div class="group">
                 <h3 class="key">Shared Key</h3>
@@ -58,21 +88,46 @@
             </div>
         </section>
 
-        <section id="charts">
-            <h2>Frequency Analysis</h2>
+        <section id="charts" class="freq-card symmetric-card symmetric-card--charts">
+            <header class="symmetric-card__header symmetric-card__header--inline">
+                <div>
+                    <h2>Frequency Analysis</h2>
+                    <p class="symmetric-card__subtitle">
+                        Compare how often each symbol appears in the plaintext and in the ciphertext.
+                    </p>
+                </div>
+                <div class="pill pill--analysis">
+                    <i class="icon-chart-bar"></i>
+                    Visual attack surface
+                </div>
+            </header>
 
-            <div id="plaintext-freq" class="group">
-                <h3>Plaintext Symbol Frequency</h3>
-                <div id="plaintext-chart" class="chart"></div>
+            <div class="freq-row">
+                <div class="freq-label">
+                    <span>Plaintext</span>
+                    <span>Symbol</span>
+                    <span>Frequency</span>
+                </div>
+
+                <div id="plaintext-freq" class="group freq-group">
+                    <div id="plaintext-chart" class="chart"></div>
+                </div>
             </div>
 
-            <div id="cyphertext-freq" class="group">
-                <h3 class="cypher">Cyphertext Symbol Frequency</h3>
-                <div id="cyphertext-chart" class="chart"></div>
+            <div class="freq-row">
+                <div class="freq-label freq-label--cypher">
+                    <span>Cyphertext</span>
+                    <span>Symbol</span>
+                    <span>Frequency</span>
+                </div>
+
+                <div id="cyphertext-freq" class="group freq-group">
+                    <div id="cyphertext-chart" class="chart"></div>
+                </div>
             </div>
         </section>
 
-        <section id="transmission">
+        <section id="transmission" class="symmetric-transmission">
             <div id="transmit-atob">
                 <i class="icon-right"></i>
                 <i class="icon-down"></i>
@@ -83,8 +138,16 @@
             </div>
         </section>
 
-        <section id="user-B" class="user">
-            <h2>Recipient (Bob)</h2>
+        <section id="user-B" class="user symmetric-card symmetric-card--bob">
+            <header class="symmetric-card__header">
+                <span class="step-badge">Step 2</span>
+                <div>
+                    <h2>Recipient (Bob)</h2>
+                    <p class="symmetric-card__subtitle">
+                        Receive the shared key and decrypt Alice&apos;s ciphertext back to plaintext.
+                    </p>
+                </div>
+            </header>
 
             <div class="group">
                 <h3 class="key">Shared Key</h3>
@@ -111,8 +174,16 @@
             </div>
         </section>
 
-        <section id="user-E" class="user">
-            <h2>Eavesdropper (Eve)</h2>
+        <section id="user-E" class="user symmetric-card symmetric-card--eve">
+            <header class="symmetric-card__header">
+                <span class="step-badge step-badge--danger">Attacker</span>
+                <div>
+                    <h2>Eavesdropper (Eve)</h2>
+                    <p class="symmetric-card__subtitle">
+                        Eve can steal the key or intercept the ciphertext to try to read the message.
+                    </p>
+                </div>
+            </header>
 
             <div class="group">
                 <h3 class="key">Stolen Key</h3>

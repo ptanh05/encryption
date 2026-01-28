@@ -881,12 +881,16 @@ body:is(.scheme-symmetric, .scheme-asymmetric) #transmission.sending {
 
 body:is(.scheme-symmetric, .scheme-asymmetric) main {
     display: grid;
-    grid-template-columns: minmax(320px, 1fr) auto minmax(320px, 1fr);
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
     grid-template-areas:
         "userA transmission userB"
         "charts charts charts"
         "userE userE userE";
-    gap: 1.25rem;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 1400px;
+    padding: 0 1.5rem 2rem;
+    margin: 0 auto;
     align-items: start;
 }
 
@@ -895,6 +899,131 @@ body:is(.scheme-symmetric, .scheme-asymmetric) #user-B { grid-area: userB; }
 body:is(.scheme-symmetric, .scheme-asymmetric) #user-E { grid-area: userE; }
 body:is(.scheme-symmetric, .scheme-asymmetric) #charts { grid-area: charts; }
 body:is(.scheme-symmetric, .scheme-asymmetric) #transmission { grid-area: transmission; }
+
+/* Symmetric / Asymmetric demo header + cards */
+.symmetric-header {
+    width: 100%;
+    max-width: 1400px;
+    padding: 1.75rem 1.5rem 0;
+    margin: 0 auto;
+}
+
+.symmetric-header__content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+.symmetric-header__title {
+    max-width: 720px;
+}
+
+.symmetric-header__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-end;
+}
+
+.pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    background: rgba(10, 255, 191, 0.08);
+    border: 1px solid rgba(0, 212, 170, 0.5);
+    color: var(--accent);
+}
+
+.pill--live {
+    background: rgba(0, 212, 170, 0.12);
+}
+
+.pill--concept {
+    background: rgba(102, 126, 234, 0.1);
+    border-color: rgba(102, 126, 234, 0.7);
+    color: #a5b4fc;
+}
+
+.pill--analysis {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.25);
+    color: var(--text);
+}
+
+.symmetric-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.symmetric-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(circle at top left, rgba(0, 212, 170, 0.12), transparent 55%);
+    opacity: 0.7;
+    mix-blend-mode: screen;
+}
+
+.symmetric-card--bob::before {
+    background: radial-gradient(circle at top right, rgba(102, 126, 234, 0.18), transparent 55%);
+}
+
+.symmetric-card--eve::before {
+    background: radial-gradient(circle at top, rgba(255, 107, 107, 0.2), transparent 60%);
+}
+
+.symmetric-card--charts::before {
+    background: radial-gradient(circle at top, rgba(0, 212, 170, 0.18), transparent 65%);
+}
+
+.symmetric-card__header {
+    position: relative;
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    margin-bottom: 0.75rem;
+}
+
+.symmetric-card__header--inline {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.symmetric-card__subtitle {
+    margin: 0.25rem 0 0;
+    font-size: 0.85rem;
+    color: var(--text-low);
+    max-width: 30rem;
+}
+
+.step-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.1rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    background: rgba(0, 212, 170, 0.18);
+    border: 1px solid rgba(0, 212, 170, 0.7);
+    color: var(--accent);
+    margin-top: 0.15rem;
+}
+
+.step-badge--danger {
+    background: rgba(255, 107, 107, 0.16);
+    border-color: rgba(255, 107, 107, 0.8);
+    color: #ff6b6b;
+}
 
 body:is(.scheme-symmetric, .scheme-asymmetric) section.user {
     border-radius: var(--radius-lg);
@@ -936,12 +1065,32 @@ body:is(.scheme-symmetric, .scheme-asymmetric) section.user textarea[disabled] {
 
 body:is(.scheme-symmetric, .scheme-asymmetric) section.user .actions {
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: flex-end;
+    align-items: center;
     gap: 0.5rem;
+    width: 100%;
 }
 
 body:is(.scheme-symmetric, .scheme-asymmetric) section.user .actions button {
     min-width: 6.5rem;
+    flex: 0 0 auto;
+}
+
+@media (max-width: 640px) {
+    body:is(.scheme-symmetric, .scheme-asymmetric) section.user .actions {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: stretch;
+    }
+
+    body:is(.scheme-symmetric, .scheme-asymmetric) section.user .actions button {
+        flex: 1 1 calc(50% - 0.5rem);
+        min-width: 0;
+        text-align: center;
+    }
 }
 
 /* Keep the transmission arrows centered and visually lighter */
@@ -954,13 +1103,16 @@ body:is(.scheme-symmetric, .scheme-asymmetric) #transmission {
 
 /* Charts area: show in two columns on desktop */
 body:is(.scheme-symmetric, .scheme-asymmetric) #charts {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 1rem;
 }
 
-body:is(.scheme-symmetric, .scheme-asymmetric) #charts > h2 {
-    grid-column: 1 / -1;
+.symmetric-transmission {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 0.5rem;
 }
 
 /* Responsive: stack everything on narrow screens */
@@ -1057,9 +1209,22 @@ input.key-value[type="number"] {
     border-color: rgba(255, 255, 255, 0.22);
 }
 
-textarea:is(.key-value, .key-stream) { height: 3.5rem; word-break: break-all; }
-textarea.cyphertext-text             { height: 5.5rem; word-break: break-all; }
-textarea.plaintext-text              { height: 3.5rem; }
+textarea:is(.key-value, .key-stream) {
+    min-height: 4rem;
+    height: auto;
+    word-break: break-all;
+}
+
+textarea.cyphertext-text {
+    min-height: 11rem;
+    height: auto;
+    word-break: break-all;
+}
+
+textarea.plaintext-text {
+    min-height: 8rem;
+    height: auto;
+}
 
 :is(input, textarea):is(.sending, .receiving),
 :is(input, textarea).alt:is(.sending, .receiving) {
@@ -1293,6 +1458,61 @@ body:is(.scheme-symmetric, .scheme-asymmetric) .chart label {
 
 #cyphertext-chart .bar {
     background-color: var(--cypher-bar);
+}
+
+/* Frequency Analysis card layout for symmetric/asymmetric demos */
+body:is(.scheme-symmetric, .scheme-asymmetric) .freq-card {
+    position: relative;
+    padding: 2.5rem 2.5rem;
+    border-radius: 1.5rem;
+    background: radial-gradient(circle at top left,
+                rgba(255, 255, 255, 0.06),
+                rgba(255, 255, 255, 0.02));
+}
+
+body:is(.scheme-symmetric, .scheme-asymmetric) .freq-row {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.5rem;
+    align-items: center;
+    margin-top: 1.5rem;
+}
+
+body:is(.scheme-symmetric, .scheme-asymmetric) .freq-label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: 'Share Tech', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-align: right;
+    line-height: 1.1;
+    color: var(--text);
+}
+
+body:is(.scheme-symmetric, .scheme-asymmetric) .freq-label--cypher {
+    color: var(--cypher-bar);
+}
+
+body:is(.scheme-symmetric, .scheme-asymmetric) .freq-group {
+    margin: 0;
+}
+
+body:is(.scheme-symmetric, .scheme-asymmetric) .freq-group .chart {
+    border-radius: 0.6rem;
+    background: rgba(5, 10, 30, 0.9);
+}
+
+@media (max-width: 768px) {
+    body:is(.scheme-symmetric, .scheme-asymmetric) .freq-row {
+        grid-template-columns: 1fr;
+        text-align: left;
+    }
+
+    body:is(.scheme-symmetric, .scheme-asymmetric) .freq-label {
+        text-align: left;
+        align-items: flex-start;
+    }
 }
 
 
@@ -1590,6 +1810,19 @@ body:is(.scheme-symmetric, .scheme-asymmetric) .chart label {
         flex-direction: row;
     }
 
+    /* Desktop layout overrides for symmetric/asymmetric user cards:
+       keep label + textarea + actions stacked so buttons have full width */
+    body:is(.scheme-symmetric, .scheme-asymmetric) section.user .group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    body:is(.scheme-symmetric, .scheme-asymmetric) section.user .group h3 {
+        width: auto;
+        text-align: left;
+        margin-bottom: 0.35rem;
+    }
+
     .privatekey::before {
         top: 0.3rem;
         right: 5.7rem;
@@ -1654,18 +1887,22 @@ body:is(.scheme-symmetric, .scheme-asymmetric) .chart label {
         flex-direction: row;
         flex-wrap: wrap;
         align-items: flex-start;
-        justify-content: flex-end;
+        justify-content: center;
+        gap: 1.5rem;
     }
 
+    /* Tất cả section trong demo symmetric/asymmetric full-width,
+       nhưng vẫn giới hạn tối đa để đọc dễ hơn trên màn hình cực rộng */
     body:is(.scheme-symmetric, .scheme-asymmetric) main section {
-        width: 45%;
+        width: 100%;
+        max-width: 1400px;
     }
 
-    body:is(.scheme-symmetric, .scheme-asymmetric) #user-A       { order: 1; flex: 1; }
+    body:is(.scheme-symmetric, .scheme-asymmetric) #user-A       { order: 1; }
+    body:is(.scheme-symmetric, .scheme-asymmetric) #transmission { order: 2; align-self: center; }
     body:is(.scheme-symmetric, .scheme-asymmetric) #user-B       { order: 3; }
+    body:is(.scheme-symmetric, .scheme-asymmetric) #charts       { order: 4; }
     body:is(.scheme-symmetric, .scheme-asymmetric) #user-E       { order: 5; }
-    body:is(.scheme-symmetric, .scheme-asymmetric) #transmission { order: 2; width: auto; align-self: center;}
-    body:is(.scheme-symmetric, .scheme-asymmetric) #charts       { order: 4; flex: 1; margin-right: 5rem; }
 
     body:is(.scheme-symmetric, .scheme-asymmetric) #transmission {
         flex-direction: column;
