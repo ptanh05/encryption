@@ -141,19 +141,14 @@
 /* Lesson Content Sections */
 .lesson-content {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: var(--spacing-xl);
-    max-width: 1400px;
+    max-width: 1000px;
     margin: 0 auto;
     width: 100%;
-    justify-content: center;
-    align-items: flex-start;
 }
 
 .lesson-content section {
-    flex: 1 1 400px;
-    max-width: 100%;
     padding: var(--spacing-xl);
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
     backdrop-filter: blur(15px);
@@ -785,8 +780,6 @@ body.light-theme .demo-btn {
 .search-result-item:hover {
     background: linear-gradient(90deg, rgba(0, 212, 170, 0.15), rgba(0, 212, 170, 0.05));
     padding-left: calc(var(--spacing-lg) + 0.5rem);
-    border-left: 3px solid var(--accent);
-}
     border-left: 3px solid var(--accent);
 }
 
