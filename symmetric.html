@@ -64,8 +64,8 @@
                 <textarea id="key-A" class="key-value" placeholder=" " disabled></textarea>
 
                 <div class="actions">
-                    <button id="key-gen-A">Generate</button>
-                    <button id="key-send-AtoB">Send</button>
+                    <button id="key-gen-A" title="Generate a random secret key">Generate</button>
+                    <button id="key-send-AtoB" title="Send the secret key to Bob">Send</button>
                 </div>
             </div>
 
@@ -74,7 +74,7 @@
                 <textarea id="plaintext-text-A" class="plaintext-text"></textarea>
 
                 <div class="actions">
-                    <button id="plaintext-encrypt">Encrypt</button>
+                    <button id="plaintext-encrypt" title="Encrypt the plaintext using the shared key">Encrypt</button>
                 </div>
             </div>
 
@@ -83,7 +83,7 @@
                 <textarea id="cyphertext-text-A" class="cyphertext-text" placeholder=" " disabled></textarea>
 
                 <div class="actions">
-                    <button id="cyphertext-send">Send</button>
+                    <button id="cyphertext-send" title="Send the encrypted message to Bob">Send</button>
                 </div>
             </div>
         </section>
@@ -154,8 +154,8 @@
                 <textarea id="key-B" class="key-value" placeholder=" " disabled></textarea>
 
                 <div class="actions">
-                    <button id="key-gen-B">Generate</button>
-                    <button id="key-send-BtoA">Send</button>
+                    <button id="key-gen-B" title="Generate a random secret key">Generate</button>
+                    <button id="key-send-BtoA" title="Send the secret key to Alice">Send</button>
                 </div>
             </div>
 
@@ -164,7 +164,7 @@
                 <textarea id="cyphertext-text-B" class="cyphertext-text" placeholder=" " disabled></textarea>
 
                 <div class="actions">
-                    <button id="cyphertext-decrypt-B">Decrypt</button>
+                    <button id="cyphertext-decrypt-B" title="Decrypt the ciphertext using the shared key">Decrypt</button>
                 </div>
             </div>
 
@@ -195,7 +195,7 @@
                 <textarea id="cyphertext-text-E" class="cyphertext-text" placeholder=" " disabled></textarea>
 
                 <div class="actions">
-                    <button id="cyphertext-decrypt-E">Decrypt</button>
+                    <button id="cyphertext-decrypt-E" title="Try to decrypt using the stolen key">Decrypt</button>
                 </div>
             </div>
 

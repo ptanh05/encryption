@@ -16,24 +16,51 @@
     <script src="https://cdn.jsdelivr.net/npm/tweetnacl@1.0.3/nacl.js"></script>
 </head>
 
-<body onload="setup( ASYMMETRIC );">
+<body class="scheme-asymmetric" onload="setup( ASYMMETRIC );">
 
-    <header id="mainheader">
-        <h1>Asymmetric Public-Key Encryption <a target="_blank" href="https://en.wikipedia.org/wiki/Public-key_cryptography"><i class="icon-link-ext"></i></a></h1>
-        <p class="sub-heading">First developed in the mid-1970s, 'Asymmetric' or 'Public-Key' encryption overcame the Key Distribution Problem through the use of keys that could be shared freely (hence 'public key').</p>
-        <p class="sub-heading">Each user has a <em>'Key Pair'</em>, two mathematically-related keys. Their 'public' key is widely shared with others who can use it to encrypt a message. The message can only be decrypted with the 'private' key (which is never shared).</p>
+    <header id="mainheader" class="symmetric-header">
+        <div class="symmetric-header__content">
+            <div class="symmetric-header__title">
+                <h1>Asymmetric Public-Key Encryption
+                    <a target="_blank" href="https://en.wikipedia.org/wiki/Public-key_cryptography">
+                        <i class="icon-link-ext"></i>
+                    </a>
+                </h1>
+                <p class="sub-heading">
+                    First developed in the mid-1970s, <strong>asymmetric</strong> or <strong>public-key</strong> encryption
+                    solved the Key Distribution Problem by allowing keys to be shared openly.
+                </p>
+                <p class="sub-heading">
+                    Each user has a <em>key pair</em>: a widely shared <strong>public key</strong> for encrypting messages,
+                    and a secret <strong>private key</strong> that is never shared and is used only for decryption.
+                </p>
+            </div>
+
+            <div class="symmetric-header__meta">
+                <div class="pill pill--live">Interactive demo</div>
+                <div class="pill pill--concept">See how public and private keys work together.</div>
+            </div>
+        </div>
     </header>
 
     <main>
-        <section id="user-A" class="user">
-            <h2>Sender (Alice)</h2>
+        <section id="user-A" class="user symmetric-card symmetric-card--alice">
+            <header class="symmetric-card__header">
+                <span class="step-badge">Step 1</span>
+                <div>
+                    <h2>Sender (Alice)</h2>
+                    <p class="symmetric-card__subtitle">
+                        Generate a key pair, share your public key, then encrypt a message for Bob using his public key.
+                    </p>
+                </div>
+            </header>
 
             <div class="group privatekey">
                 <h3 class="key alt">Private Key</h3>
                 <textarea id="key-A-private" class="key-stream alt" placeholder=" " disabled></textarea>
 
                 <div class="actions">
-                    <button id="key-gen-A">Generate</button>
+                    <button id="key-gen-A" title="Generate Alice's key pair (public + private)">Generate</button>
                 </div>
             </div>
 
@@ -42,7 +69,7 @@
                 <textarea id="key-A-public" class="key-value alt" placeholder=" " disabled></textarea>
 
                 <div class="actions">
-                    <button id="key-send-AtoB">Send</button>
+                    <button id="key-send-AtoB" title="Send Alice's public key to Bob">Send</button>
                 </div>
             </div>
 
@@ -56,7 +83,7 @@
                 <textarea id="plaintext-text-A" class="plaintext-text"></textarea>
 
                 <div class="actions">
-                    <button id="plaintext-encrypt">Encrypt</button>
+                    <button id="plaintext-encrypt" title="Encrypt this message using Bob's public key">Encrypt</button>
                 </div>
             </div>
 
@@ -65,12 +92,12 @@
                 <textarea id="cyphertext-text-A" class="cyphertext-text" placeholder=" " disabled></textarea>
 
                 <div class="actions">
-                    <button id="cyphertext-send">Send</button>
+                    <button id="cyphertext-send" title="Send the encrypted message to Bob">Send</button>
                 </div>
             </div>
         </section>
 
-        <section id="transmission">
+        <section id="transmission" class="symmetric-transmission">
             <div id="transmit-atob">
                 <i class="icon-right"></i>
                 <i class="icon-down"></i>
@@ -81,15 +108,23 @@
             </div>
         </section>
 
-        <section id="user-B" class="user">
-            <h2>Recipient (Bob)</h2>
+        <section id="user-B" class="user symmetric-card symmetric-card--bob">
+            <header class="symmetric-card__header">
+                <span class="step-badge">Step 2</span>
+                <div>
+                    <h2>Recipient (Bob)</h2>
+                    <p class="symmetric-card__subtitle">
+                        Generate your key pair, share your public key, then decrypt Alice's ciphertext using your private key.
+                    </p>
+                </div>
+            </header>
 
             <div class="group privatekey">
                 <h3 class="key">Private Key</h3>
                 <textarea id="key-B-private" class="key-stream" placeholder=" " disabled></textarea>
 
                 <div class="actions">
-                    <button id="key-gen-B">Generate</button>
+                    <button id="key-gen-B" title="Generate Bob's key pair (public + private)">Generate</button>
                 </div>
             </div>
 
@@ -98,7 +133,7 @@
                 <textarea id="key-B-public" class="key-value" placeholder=" " disabled></textarea>
 
                 <div class="actions">
-                    <button id="key-send-BtoA">Send</button>
+                    <button id="key-send-BtoA" title="Send Bob's public key to Alice">Send</button>
                 </div>
             </div>
 
@@ -112,7 +147,7 @@
                 <textarea id="cyphertext-text-B" class="cyphertext-text" placeholder=" " disabled></textarea>
 
                 <div class="actions">
-                    <button id="cyphertext-decrypt-B">Decrypt</button>
+                    <button id="cyphertext-decrypt-B" title="Decrypt Alice's ciphertext using Bob's private key">Decrypt</button>
                 </div>
             </div>
 
@@ -122,8 +157,16 @@
             </div>
         </section>
 
-        <section id="user-E" class="user">
-            <h2>Eavesdropper (Eve)</h2>
+        <section id="user-E" class="user symmetric-card symmetric-card--eve">
+            <header class="symmetric-card__header">
+                <span class="step-badge step-badge--danger">Attacker</span>
+                <div>
+                    <h2>Eavesdropper (Eve)</h2>
+                    <p class="symmetric-card__subtitle">
+                        Eve can intercept public keys and ciphertext, but cannot decrypt without the private keys.
+                    </p>
+                </div>
+            </header>
 
             <div class="group">
                 <h3 class="key alt">Alice's Public Key</h3>
@@ -140,7 +183,7 @@
                 <textarea id="cyphertext-text-E" class="cyphertext-text" placeholder=" " disabled></textarea>
 
                 <div class="actions">
-                    <button id="cyphertext-decrypt-E">Decrypt</button>
+                    <button id="cyphertext-decrypt-E" title="Try to decrypt Alice's ciphertext using only public keys">Decrypt</button>
                 </div>
             </div>
 

@@ -2,6 +2,37 @@
    LESSON SYSTEM STYLES - ENHANCED VERSION
    ============================================ */
 
+/* Global fix for overflow - allow horizontal scroll */
+.lesson-card, .module, .module h2, section, .lesson-card a {
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: auto;
+}
+
+.lesson-card a {
+    width: 100%;
+}
+
+/* Custom scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, var(--accent), var(--secondary));
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(90deg, #20c997, var(--accent));
+}
+
 /* Smooth page transitions */
 .lesson {
     animation: fadeInUp 0.6s ease-out;
@@ -110,14 +141,19 @@
 /* Lesson Content Sections */
 .lesson-content {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: var(--spacing-xl);
-    max-width: 1000px;
+    max-width: 1400px;
     margin: 0 auto;
     width: 100%;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 .lesson-content section {
+    flex: 1 1 400px;
+    max-width: 100%;
     padding: var(--spacing-xl);
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
     backdrop-filter: blur(15px);
@@ -646,47 +682,111 @@ body.light-theme .demo-btn {
     width: 100%;
     padding: var(--spacing-md) var(--spacing-xl);
     font-size: 1rem;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: var(--radius-full);
     color: var(--text-primary);
-    transition: all var(--transition-base);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+/* Search icon */
+.search-container {
+    position: relative;
+}
+
+.search-container::before {
+    content: '🔍';
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    opacity: 0.6;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.search-input {
+    padding-left: 2.75rem;
 }
 
 .search-input:focus {
     outline: none;
     border-color: var(--accent);
-    background: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 0 0 3px rgba(0, 212, 170, 0.1);
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 
+        0 0 0 3px rgba(0, 212, 170, 0.15),
+        0 4px 20px rgba(0, 212, 170, 0.1);
+    transform: scale(1.01);
+}
+
+.search-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* Focus glow animation */
+@keyframes searchGlow {
+    0%, 100% { box-shadow: 0 0 0 3px rgba(0, 212, 170, 0.15), 0 4px 20px rgba(0, 212, 170, 0.1); }
+    50% { box-shadow: 0 0 0 5px rgba(0, 212, 170, 0.2), 0 4px 25px rgba(0, 212, 170, 0.15); }
+}
+
+.search-input:focus {
+    animation: searchGlow 2s ease-in-out infinite;
 }
 
 .search-results {
     display: none;
     position: absolute;
-    top: calc(100% + 0.5rem);
+    top: calc(100% + 0.75rem);
     left: 0;
     right: 0;
-    max-height: 400px;
+    max-height: 450px;
     overflow-y: auto;
     background: linear-gradient(135deg, rgba(10, 14, 39, 0.98), rgba(20, 27, 45, 0.98));
     backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: var(--radius-md);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 212, 170, 0.2);
+    border-radius: var(--radius-lg);
+    box-shadow: 
+        0 10px 40px rgba(0, 0, 0, 0.4),
+        0 0 20px rgba(0, 212, 170, 0.1);
     z-index: 1000;
+    animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .search-result-item {
-    display: block;
-    padding: var(--spacing-md);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md) var(--spacing-lg);
     text-decoration: none;
     color: var(--text-primary);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    transition: all var(--transition-base);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.search-result-item::before {
+    content: '📖';
+    font-size: 1.2rem;
 }
 
 .search-result-item:hover {
-    background: rgba(0, 212, 170, 0.1);
+    background: linear-gradient(90deg, rgba(0, 212, 170, 0.15), rgba(0, 212, 170, 0.05));
+    padding-left: calc(var(--spacing-lg) + 0.5rem);
+    border-left: 3px solid var(--accent);
+}
     border-left: 3px solid var(--accent);
 }
 
@@ -1075,47 +1175,85 @@ body.light-theme .demo-btn {
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--radius-md);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-    transition: all var(--transition-base);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
 }
 
+/* Enhanced left border indicator */
 .lesson-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--accent), var(--secondary));
+    opacity: 0.4;
+    transition: all 0.3s ease;
+}
+
+/* Shimmer effect */
+.lesson-card::after {
     content: '';
     position: absolute;
     top: 0;
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(0, 212, 170, 0.1), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
     transition: left 0.6s ease;
 }
 
-.lesson-card::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 3px;
-    height: 100%;
-    background: linear-gradient(180deg, var(--accent), var(--secondary));
-    opacity: 0;
-    transition: opacity var(--transition-base);
-}
-
 .lesson-card:hover::before {
-    left: 100%;
+    opacity: 1;
+    width: 5px;
 }
 
 .lesson-card:hover::after {
-    opacity: 1;
+    left: 100%;
 }
 
 .lesson-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 40px rgba(0, 212, 170, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    border-color: rgba(0, 212, 170, 0.25);
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    transform: translateY(-5px) scale(1.01);
+    box-shadow: 
+        0 20px 50px rgba(0, 212, 170, 0.25), 
+        0 8px 20px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    border-color: rgba(0, 212, 170, 0.35);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.04));
+}
+
+/* Completed state */
+.lesson-card[data-completed="true"]::before {
+    background: linear-gradient(180deg, var(--success), #20c997);
+    opacity: 0.8;
+}
+
+/* Glow effect on hover for enhanced cards */
+.lesson-card.enhanced-hover:hover {
+    box-shadow: 
+        0 0 30px rgba(0, 212, 170, 0.3),
+        0 20px 50px rgba(0, 212, 170, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* Color shift variant */
+.lesson-card.color-shift {
+    position: relative;
+}
+
+.lesson-card.color-shift::before {
+    background: linear-gradient(180deg, #667eea, #764ba2);
+}
+
+/* Neon glow variant */
+.lesson-card.neon-glow:hover {
+    box-shadow: 
+        0 0 25px rgba(102, 126, 234, 0.4),
+        0 20px 50px rgba(102, 126, 234, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    border-color: rgba(102, 126, 234, 0.4);
 }
 
 .lesson-card a {
@@ -1273,19 +1411,22 @@ body.light-theme .demo-btn {
 
 #progress-overview .progress-bar {
     width: 100%;
-    height: 24px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
     overflow: hidden;
-    margin: 1rem 0;
+    margin: 1.25rem 0;
     position: relative;
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+        inset 0 2px 4px rgba(0, 0, 0, 0.2),
+        0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 #progress-overview .progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, var(--accent), var(--key-back));
+    background: linear-gradient(90deg, var(--accent), #20c997, var(--accent));
     background-size: 200% 100%;
     transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
@@ -1295,8 +1436,31 @@ body.light-theme .demo-btn {
     font-weight: bold;
     font-size: 0.9rem;
     width: 0%;
-    animation: shimmer 3s infinite;
-    border-radius: 12px;
+    animation: shimmer 3s infinite linear;
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 
+        0 2px 8px rgba(0, 212, 170, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* Progress fill shine effect */
+#progress-overview .progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.25), transparent);
+    border-radius: 16px 16px 0 0;
+}
+
+/* Completion celebration */
+#progress-overview .progress-fill.complete {
+    background: linear-gradient(90deg, #20c997, #51cf66, #20c997);
 }
 
 #progress-overview p {
@@ -1315,6 +1479,21 @@ body.light-theme .demo-btn {
     flex-direction: column;
     gap: 1.5rem;
     padding: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Module decorative glow */
+.module::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at left center, rgba(0, 212, 170, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
 }
 
 .module h2 {
@@ -1323,18 +1502,39 @@ body.light-theme .demo-btn {
     gap: var(--spacing-md);
     font-size: clamp(1.3rem, 3vw, 1.6rem);
     margin-bottom: var(--spacing-lg);
-    padding: var(--spacing-lg) var(--spacing-xl);
+    padding: var(--spacing-md) var(--spacing-lg);
     background: linear-gradient(135deg, rgba(0, 212, 170, 0.08), rgba(102, 126, 234, 0.04));
     backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 212, 170, 0.15);
     border-left: 4px solid var(--accent);
     border-radius: var(--radius-md);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-    transition: all var(--transition-base);
+    box-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.2), 
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
     font-weight: 600;
     position: relative;
     overflow: hidden;
+    z-index: 1;
+}
+
+/* Shine effect on module heading */
+.module h2::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.module h2:hover::after {
+    left: 100%;
 }
 
 .module h2::before {
@@ -1345,7 +1545,7 @@ body.light-theme .demo-btn {
     width: 4px;
     height: 100%;
     background: linear-gradient(180deg, var(--accent), var(--secondary));
-    transition: width var(--transition-base);
+    transition: width 0.3s ease;
 }
 
 .module h2:hover {

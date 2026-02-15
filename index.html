@@ -376,6 +376,34 @@
             if (typeof UIEnhancements !== 'undefined') {
                 UIEnhancements.init();
             }
+            
+            // Enhanced scroll effects for navbar
+            const navbar = document.getElementById('topNavbar');
+            let lastScroll = 0;
+            
+            window.addEventListener('scroll', function() {
+                const currentScroll = window.pageYOffset;
+                
+                // Add scrolled class when past threshold
+                if (currentScroll > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+                
+                // Shrink navbar on scroll down, expand on scroll up
+                if (currentScroll > 100) {
+                    if (currentScroll > lastScroll) {
+                        navbar.classList.add('shrunk');
+                    } else {
+                        navbar.classList.remove('shrunk');
+                    }
+                } else {
+                    navbar.classList.remove('shrunk');
+                }
+                
+                lastScroll = currentScroll;
+            });
         });
     </script>
     
